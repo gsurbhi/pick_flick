@@ -1,13 +1,14 @@
 import React, {Component} from 'react'
 import { Jumbotron, Container } from 'reactstrap';
+import UserServiceClient from '../services/user.service.client'
 
 export default class LoginComponent extends Component{
-    constructor(props){
-        super(props)
-        this.username = '';
-        this.password = '';
-    }
+    username = '';
+    password = '';
 
+    login(username,password){
+        UserServiceClient.login(username,password)
+    }
 
     render(){
         return (
@@ -16,7 +17,7 @@ export default class LoginComponent extends Component{
                     <Container>
 
                         <h1 className="display-3">
-                            <i className="fa fa-video-camera pr-2 text-warning"></i>
+                            <i className="fa fa-video-camera pr-1 text-warning"></i>
                             Pick Flick
                         </h1>
                         <p className="lead text-secondary">The one stop hub for movie aficionados </p>
@@ -59,7 +60,8 @@ export default class LoginComponent extends Component{
                             <div className="col-sm-8">
                                 <button className="btn btn-primary btn-block"
                                         type="button"
-                                        id="signInBtn">
+                                        id="signInBtn"
+                                        onClick={() => this.login(this.username,this.password)}>
                                     Sign in
                                 </button>
                             </div>
