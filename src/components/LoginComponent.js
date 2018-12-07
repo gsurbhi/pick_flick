@@ -1,16 +1,24 @@
 import React, {Component} from 'react'
 import { Jumbotron, Container } from 'reactstrap';
 import UserServiceClient from '../services/user.service.client'
-
+import {Redirect} from 'react-router-dom'
 export default class LoginComponent extends Component{
     username = '';
     password = '';
-
+    state = {
+        redirect: false
+    }
     login(username,password){
         UserServiceClient.login(username,password)
+        this.setState({
+            redirect:true
+        })
     }
 
     render(){
+        if(this.state.redirect === true){
+            return <Redirect to = '/1/home'/>
+        }
         return (
             <div>
                 <Jumbotron fluid className="bg-light">
