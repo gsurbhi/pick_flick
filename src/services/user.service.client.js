@@ -77,8 +77,9 @@ class UserServiceClient {
     static updateProfile(user){
         return fetch(heroku+'profile',{
             method:'PUT',
+            body:JSON.stringify(user),
             credentials:'include'
-        }).then(response=>response.json())
+        })
     }
 
     static getProfile() {
@@ -86,18 +87,7 @@ class UserServiceClient {
         method:'GET',
         credentials:'include'
     }).then(response=>response.json())
-        // return {
-        //     id:1,
-        //     username:'alice',
-        //     password:'alice',
-        //     firstName:'Alice',
-        //     lastName:'Wonderland',
-        //     email:'alice@pickflick.com',
-        //     dob:'26-11-1993',
-        //     phone:'617-893-8604',
-        //     city: 'Boston'
-        //
-        // }
+
 
     }
 }

@@ -5,7 +5,7 @@ export default class UserProfile extends Component{
 
     constructor(props) {
         super(props)
-        this.userService = UserServiceClient.instance;
+
         this.state = {
             user: {
                 id:'',
@@ -21,22 +21,61 @@ export default class UserProfile extends Component{
         this.updateField = this.updateField.bind(this);
     }
     componentDidMount(){
-       /* return fetch("http://sheltered-lowlands-30899.herokuapp.com/api/profile")
-            .then(response => response.json()).then(user => {
-                this.setState({
-                    id:user.id,
-                    username:user.username,
-                    firstName:user.firstName,
-                    lastName:user.lastName,
-                    courses:user.courses
-                })
-            })*/
+
        UserServiceClient.getProfile().then(user=> this.setState({user:user}))
+
     }
 
     updateField(portion,target){
 
-        this.state.user.portion = target
+        this.state.update()
+
+    }
+
+    updatefields(type,e){
+
+        if(type=='username'){
+            this.state.user.username = e;
+            let nuser = this.state.user
+            this.setState({user: nuser})
+        }
+        if(type=='password'){
+            this.state.user.password = e;
+            let nuser = this.state.user
+            this.setState({user: nuser})
+        }
+        if(type=='firstname'){
+            this.state.user.firstName = e;
+            let nuser = this.state.user
+            this.setState({user: nuser})
+        }
+        if(type=='lastname'){
+            this.state.user.lastName = e;
+            let nuser = this.state.user
+            this.setState({user: nuser})
+        }
+        if(type=='email'){
+            this.state.user.email = e;
+            let nuser = this.state.user
+            this.setState({user: nuser})
+        }
+        if(type=='phone'){
+            this.state.user.phone = e;
+            let nuser = this.state.user
+            this.setState({user: nuser})
+        }
+        if(type=='city'){
+            this.state.user.city = e;
+            let nuser = this.state.user
+            this.setState({user: nuser})
+        }
+        if(type=='dob'){
+            this.state.user.dob = e;
+            let nuser = this.state.user
+            this.setState({user: nuser})
+        }
+
+
 
     }
 
@@ -48,8 +87,13 @@ export default class UserProfile extends Component{
     }
 
     updateProfile(){
-        UserServiceClient.updateProfile(this.state.user).then(user => this.setState({user:user}))
+        console.log(this.state.user)
+        UserServiceClient.updateProfile(this.state.user)
+        UserServiceClient.getProfile().then(user=> this.setState({user:user}))
+
+
     }
+
 
 
     render(){
@@ -76,7 +120,8 @@ export default class UserProfile extends Component{
                             <div className="col-sm-8">
                                 <input className="form-control"
                                        id="username"
-                                       value={this.state.user.firstName}
+                                       value={this.state.user.username}
+                                       onChange={(e)=> this.updatefields('username',e.target.value)}
                                        readOnly />
                             </div>
                         </div>
@@ -91,7 +136,7 @@ export default class UserProfile extends Component{
                                 <input className="form-control"
                                        type="password"
                                        id="password"
-                                       onChange={(e)=> this.updateField(e)}
+                                       onChange={(e)=> this.updatefields('password',e.target.value)}
                                        value={this.state.user.password}/>
                             </div>
                         </div>
@@ -106,7 +151,7 @@ export default class UserProfile extends Component{
                                 <input className="form-control"
                                        type="text"
                                        id="firstName"
-                                       onChange={(e)=> this.updateField("firstName",e.target.value)}
+                                       onChange={(e)=> this.updatefields('firstname',e.target.value)}
                                        value={this.state.user.firstName}/>
                             </div>
                         </div>
@@ -121,6 +166,7 @@ export default class UserProfile extends Component{
                                 <input className="form-control"
                                        type="text"
                                        id="lName"
+                                       onChange={(e)=> this.updatefields('lastname',e.target.value)}
                                        value={this.state.user.lastName}/>
                             </div>
                         </div>
@@ -135,6 +181,7 @@ export default class UserProfile extends Component{
                                 <input className="form-control"
                                        type="email"
                                        id="email"
+                                       onChange={(e)=> this.updatefields('email',e.target.value)}
                                        value={this.state.user.email}/>
                             </div>
                         </div>
@@ -149,6 +196,7 @@ export default class UserProfile extends Component{
                                 <input className="form-control"
                                        type="date"
                                        id="dob"
+                                       onChange={(e)=> this.updatefields('dob',e.target.value)}
                                        value={this.state.user.dob}/>
                             </div>
                         </div>
@@ -163,6 +211,7 @@ export default class UserProfile extends Component{
                                 <input className="form-control"
                                        type="phone"
                                        id="phone"
+                                       onChange={(e)=> this.updatefields('phone',e.target.value)}
                                        value={this.state.user.phone}/>
                             </div>
                         </div>
@@ -177,6 +226,7 @@ export default class UserProfile extends Component{
                                 <input className="form-control"
                                        type="text"
                                        id="city"
+                                       onChange={(e)=> this.updatefields('city',e.target.value)}
                                        value={this.state.user.city}/>
                             </div>
                         </div>
@@ -198,7 +248,7 @@ export default class UserProfile extends Component{
                             </div>
                             <div className="col-sm-8">
                                     <button className="btn btn-warning btn-block"
-                                            onClick={this.updateProfile}>
+                                    onClick={this.updateProfile}>
                                         Update Profile
                                     </button>
                             </div>
