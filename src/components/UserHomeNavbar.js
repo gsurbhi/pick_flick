@@ -1,6 +1,25 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 export default class UserHomeNavbar extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+
+            userId:''
+        };
+
+        this.setUserId = this.setUserId.bind(this)
+
+
+    }
+
+    setUserId(userId){
+        this.setState({userId:userId})
+    }
+    componentDidMount() {
+        UserServiceClient.getProfile().then(user => this.setUserId(user._id))
+
+    }
 
     render(){
         return(
@@ -46,7 +65,7 @@ export default class UserHomeNavbar extends Component {
                         <div className="float-right">
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item">
-                                <Link to='/:userid/profile'
+                                <Link to={'/'+this.state.userId+'/profile'}
                                       className="nav-link">
                                     <i className="fa fa-user"></i>
                                 </Link>
