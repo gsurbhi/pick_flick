@@ -12,7 +12,7 @@ const UserListCards = ({movie,deleteFromUserList}) =>
                 <button className="btn btn-outline-warning btn-sm mr-1">
                     <i className="fa fa-play"></i>
                 </button>
-                <button className="btn btn-outline-warning btn-sm mr-1"
+                <button className="btn btn-outline-danger btn-sm mr-1"
                         onClick={() => {deleteFromUserList(movie)}}>
                     <i className="fa fa-trash"></i>
                 </button>

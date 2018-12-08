@@ -3,6 +3,7 @@ import LoginComponent from "./components/LoginComponent";
 import Home from "./containers/Home";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import UserHomeContainer from "./containers/UserHomeContainer";
+import UserProfile from "./containers/UserProfile";
 
 export default class App extends React.Component{
 
@@ -18,6 +19,8 @@ export default class App extends React.Component{
                                component={LoginComponent} />
                         <Route path="/:userid/home"
                                component={UserHomeContainer} />
+                        <Route path="/:userid/profile"
+                               component={UserProfile} />
                     </div>
                 </Router>
             </div>

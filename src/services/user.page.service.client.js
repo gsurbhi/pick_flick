@@ -63,7 +63,7 @@ export default class UserPageService {
 
     deleteFromUsersList = (movie) => {
         // CHECK IF MOVIE IS PRESEnt
-        myList = myList.filter(movie1 => movie1!=movie)
+        myList = myList.filter(movie1 => movie1!==movie)
     }
 }
 
