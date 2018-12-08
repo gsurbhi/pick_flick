@@ -1,6 +1,7 @@
 import React from 'react'
 import AdminServiceClient from '../services/admin.service.client';
 import UserServiceClient from "../services/user.service.client";
+import UserHomeNavbar from "../components/UserHomeNavbar";
 
 
 export default class AdminContainer extends React.Component {
@@ -9,14 +10,21 @@ export default class AdminContainer extends React.Component {
         super(props);
         this.state = {
             userId: '',
-            users: ''
+            users: []
         };
 
+        this.renderUsers = this.renderUsers.bind(this);
+
     }
+
+    setUsers(users){
+        console.log(users)
+        this.setState({users:users})
+    }
+
     componentDidMount(){
         UserServiceClient.getProfile().then(user=> this.setState({userId:user._id}));
-        AdminServiceClient.getUsers().then(users=> this.setState({users:users}))
-        console.log("abs"+this.state.users);
+        AdminServiceClient.getUsers().then(users=> this.setUsers(users))
 
     }
 
@@ -31,7 +39,8 @@ export default class AdminContainer extends React.Component {
 
     render() {
         return (
-            <div className='container-fluid'>
+            <div>
+                <UserHomeNavbar/>
                 <table className="table w-100">
 
                     <thead className='thead-dark'>
@@ -109,69 +118,8 @@ export default class AdminContainer extends React.Component {
     }
 
     renderUsers() {
-        if (this.props.users) {
-            return this.props.users.map(user => {
-                // if (this.state.userId === user._id) {
-                //     this.username = user.username;
-                //     return (
-                //         <tr className="table-active p-3">
-                //             <td>
-                //                 <input placeholder={this.username}
-                //                        className="w-100 form-control"
-                //                        onChange={(event) => this.username = event.target.value}/>
-                //                 {user.username}
-                //             </td>
-                //             <td></td>
-                //             <td>
-                //                 <input placeholder={this.firstName}
-                //                        className="w-100 form-control"
-                //                        onChange={(event) => this.firstName = event.target.value}/>
-                //                 {user.firstName}
-                //             </td>
-                //             <td>
-                //                 <input placeholder={this.lastName}
-                //                        className="w-100 form-control"
-                //                        onChange={(event) => this.lastName = event.target.value}/>
-                //                 {user.lastName}
-                //             </td>
-                //             <td>
-                //                 <select value={this.type}
-                //                         onChange={(event) => this.type = event.target.value}>
-                //                     <option value="Fan">Fan</option>
-                //                     <option value="Actor">Actor</option>
-                //                     <option value="Critic">Critic</option>
-                //                     <option value="Admin">Admin</option>
-                //                 </select>
-                //                 {user.type}
-                //             </td>
-                //             <td>
-                //                 <input placeholder={this.email}
-                //                        className="w-100 form-control"
-                //                        onChange={(event) => this.email = event.target.value}/>
-                //                 {user.email}
-                //             </td>
-                //             <td>
-                //                 <input placeholder={this.city}
-                //                        className="w-100 form-control"
-                //                        onChange={(event) => this.city = event.target.value}/>
-                //                 {user.city}
-                //             </td>
-                //             <td>
-                //                 <input placeholder={this.phone}
-                //                        className="w-100 form-control"
-                //                        onChange={(event) => this.phone = event.target.value}/>
-                //                 {user.phone}
-                //             </td>
-                //             <td>
-                //                 <button type='btn' className="btn btn-dark"
-                //                         onClick={() => this.UpdateUser(user._id)}>
-                //                     Update
-                //                 </button>
-                //             </td>
-                //         </tr>
-                //     )
-               // }
-               //  else {
+        if (this.state.users) {
+            return this.state.users.map(user => {
                     return (
                         <tr>
                             <td>{user.username}</td>
@@ -186,12 +134,12 @@ export default class AdminContainer extends React.Component {
                                 <button type='btn'
                                         className="btn btn-outline-info w-100"
                                         onClick={() => this.selectUser(user._id)}>
-                                    Edit
+                                    <i className="fa fa-pencil"></i>
                                 </button>
                                 <button type='btn'
-                                        className="btn btn-danger w-100"
+                                        className="btn btn-danger w-100 my-1"
                                         onClick={() => this.deleteUser(user._id)}>
-                                    Delete
+                                    <i className="fa fa-trash"></i>
                                 </button>
                             </td>
                         </tr>
@@ -202,7 +150,12 @@ export default class AdminContainer extends React.Component {
     }
 
     deleteUser(id) {
-        AdminServiceClient.deleteUser(id);
+        if(id != this.state.userId) {
+            AdminServiceClient.deleteUser(id);
+        }
+        else {
+            alert("You cannot delete your account")
+        }
         this.username = '';
         this.firstName = '';
         this.lastName = '';

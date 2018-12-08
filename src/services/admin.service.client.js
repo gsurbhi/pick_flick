@@ -28,7 +28,7 @@ class AdminServiceClient {
             headers: {
                 'Content-Type': 'application/json'
             }
-        });
+        }).then(response => response.json());
     }
 
     static updateUser(user){
