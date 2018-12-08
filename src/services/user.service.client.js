@@ -32,15 +32,18 @@ class UserServiceClient {
             password:password};
         return fetch(heroku+'login',{
             method:'POST',
+            headers:{
+                'Content-type': 'application/json'
+            },
             credentials:'include',
             body: JSON.stringify(user),
-        }).then(response=>response.json())
+        })
     }
 
     static  logout (){
         return fetch(heroku+'logout',{
             credentials:'include'
-        }).then(response => console.log("logged out"))
+        })
     }
 
     static register(user){
@@ -59,6 +62,9 @@ class UserServiceClient {
     static createUser (user){
         return fetch(heroku+'user',{
             method:'POST',
+            headers:{
+                'Content-type': 'application/json'
+            },
             credentials:'include',
             body:JSON.stringify(user),
         }).then(response=>response.json())
@@ -81,6 +87,9 @@ class UserServiceClient {
     static updateProfile(user){
         return fetch(heroku+'profile',{
             method:'PUT',
+            headers:{
+                'Content-type': 'application/json'
+            },
             body:JSON.stringify(user),
             credentials:'include'
         })

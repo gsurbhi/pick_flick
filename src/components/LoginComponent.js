@@ -12,15 +12,20 @@ export default class LoginComponent extends Component{
     }
     login(username,password){
 
-        (UserServiceClient.login(username,password)).
-        then(user=>
-        {if (user.username.length>0){
-            this.setState({
-                redirect:true,
-                user:user
-            })}})
-
-
+        (UserServiceClient.login(username,password)).then(response=>
+        {
+            if (response.status === 500) {
+                alert("Wrong username or password")
+            }
+            else {
+                response.json().then(user=>
+                {if (user){
+                    this.setState({
+                        redirect:true,
+                        user:user
+                    })}})}
+        })
+        
     }
 
     render() {
