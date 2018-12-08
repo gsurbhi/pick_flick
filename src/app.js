@@ -7,6 +7,7 @@ import UserProfile from "./containers/UserProfile";
 import CriticHomeMovieCards from "./components/CriticHomeMovieCards";
 import CriticHomeContainer from "./containers/CriticHomeContainer";
 import RegisterUserContainer from "./containers/RegisterUserContainer";
+import AdminContainer from "./containers/AdminContainer";
 
 export default class App extends React.Component{
 
