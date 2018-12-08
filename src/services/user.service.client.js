@@ -74,6 +74,13 @@ class UserServiceClient {
         }).then(response=>response.json())
     }
 
+    static updateProfile(user){
+        return fetch(heroku+'profile',{
+            method:'PUT',
+            credentials:'include'
+        }).then(response=>response.json())
+    }
+
     static getProfile() {
     return fetch(heroku+'profile',{
         method:'GET',

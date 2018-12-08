@@ -35,8 +35,20 @@ export default class UserProfile extends Component{
     }
 
     updateField(portion,target){
-        console.log(portion)
-        console.log(target)
+
+        this.state.user.portion = target
+
+    }
+
+    logout(){
+        UserServiceClient.logout().then(()=>{
+            window.location.href='/'
+        })
+
+    }
+
+    updateProfile(){
+        UserServiceClient.updateProfile(this.state.user).then(user => this.setState({user:user}))
     }
 
 
@@ -54,7 +66,6 @@ export default class UserProfile extends Component{
                 <div className="container">
                     <h1>Profile</h1>
                     <form>
-
                         <div className="form-group row">
                             <label htmlFor="username"
                                    className="col-sm-2 col-form-label">
@@ -80,7 +91,7 @@ export default class UserProfile extends Component{
                                 <input className="form-control"
                                        type="password"
                                        id="password"
-                                       onChange={(e)=> this.updateField("password",e.target.value)}
+                                       onChange={(e)=> this.updateField(e)}
                                        value={this.state.user.password}/>
                             </div>
                         </div>
@@ -169,7 +180,6 @@ export default class UserProfile extends Component{
                                        value={this.state.user.city}/>
                             </div>
                         </div>
-
                         <div className="form-group row">
                             <div className="col-sm-8 my-2">
                                 <Link to={"/"+this.state.user.id+"/home"}>
@@ -180,10 +190,17 @@ export default class UserProfile extends Component{
                             </div>
                             <div className="col-sm-8">
                                 <Link to="/">
-                                    <button className="btn btn-danger btn-block">
+                                    <button className="btn btn-danger btn-block"
+                                    onClick={this.logout}>
                                         Logout
                                     </button>
                                 </Link>
+                            </div>
+                            <div className="col-sm-8">
+                                    <button className="btn btn-warning btn-block"
+                                            onClick={this.updateProfile}>
+                                        Update Profile
+                                    </button>
                             </div>
                         </div>
                     </form>
