@@ -28,8 +28,8 @@ export default class App extends React.Component{
                                component={CriticHomeContainer} />
                         <Route path="/profile/:userid"
                                component={UserProfile} />
-                        <Route path="/admin"
-                               component={AdminContainer}/>
+                       <Route path="/admin"
+                               component={AdminContainer}/>*
                     </div>
                 </Router>
             </div>

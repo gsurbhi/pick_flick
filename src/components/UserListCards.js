@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
 
-const UserListCards = ({movie,deleteFromUserList}) =>
+const UserListCards = ({movie,deleteFromUserWatchList}) =>
     <div>
         <div className="card" styles={{width: '18rem'}}>
             <img className="card-img-top"
@@ -13,7 +13,7 @@ const UserListCards = ({movie,deleteFromUserList}) =>
                     <i className="fa fa-play"></i>
                 </button>
                 <button className="btn btn-outline-danger btn-sm mr-1"
-                        onClick={() => {deleteFromUserList(movie)}}>
+                        onClick={() => {deleteFromUserWatchList(movie)}}>
                     <i className="fa fa-trash"></i>
                 </button>
             </div>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import UserServiceClient from '../services/user.service.client'
+import MovieServiceClient from "../services/movie.service.client";
 export default class UserHomeNavbar extends Component {
     constructor(props){
         super(props);
@@ -9,17 +10,25 @@ export default class UserHomeNavbar extends Component {
             userId:'',
             userType:''
         };
-
         this.setUserId = this.setUserId.bind(this)
-
+        this.logout = this.logout.bind(this)
 
     }
 
-    setUserId(userId){
-        this.setState({userId:userId})
+    setUserId(userId,type){
+        this.setState({
+            userId:userId,
+            userType:type
+        });
     }
     componentDidMount() {
         UserServiceClient.getProfile().then(user => this.setUserId(user._id,user.type))
+    }
+
+    logout(){
+        UserServiceClient.logout().then(()=>{
+            window.location.href='/'
+        })
 
     }
 
@@ -53,6 +62,12 @@ export default class UserHomeNavbar extends Component {
                             <li className="nav-item">
                                 <Link to="/" className="nav-link">Watch List</Link>
                             </li>
+                            {
+                                this.state.userType === 'Critic' &&
+                                <li>
+                                    <Link to="/" className="nav-link">Review List</Link>
+                                </li>
+                            }
 
                         </ul>
                         <form className="form-inline my-2 my-lg-0">
@@ -74,7 +89,7 @@ export default class UserHomeNavbar extends Component {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <button className="btn nav-link bg-dark">
+                                <button className="btn nav-link bg-dark" onClick={this.logout}>
                                     <i className="fa fa-power-off"></i>
                                 </button>
                             </li>

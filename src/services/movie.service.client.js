@@ -1,4 +1,4 @@
-let HEROKU_URL = 'https://desolate-retreat-56126.herokuapp.com/api/';
+let HEROKU_URL = 'http://desolate-retreat-56126.herokuapp.com/api/';
 
 class MovieServiceClient {
 
@@ -50,6 +50,17 @@ class MovieServiceClient {
     static getRecommendedMovies() {
         return fetch(HEROKU_URL + 'recommendedMovies', {
             credentials: 'include'
+        })
+    }
+
+    static setWatchListMovies(movie){
+        return fetch(HEROKU_URL + 'movie/'+movie.id+'/watchlist', {
+            method:'post',
+            credentials: 'include',
+            body: JSON.stringify(movie),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
     }
 }
