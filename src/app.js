@@ -4,6 +4,9 @@ import Home from "./containers/Home";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import UserHomeContainer from "./containers/UserHomeContainer";
 import UserProfile from "./containers/UserProfile";
+import CriticHomeMovieCards from "./components/CriticHomeMovieCards";
+import CriticHomeContainer from "./containers/CriticHomeContainer";
+import RegisterUserContainer from "./containers/RegisterUserContainer";
 
 export default class App extends React.Component{
 
@@ -14,13 +17,17 @@ export default class App extends React.Component{
                     <div>
                         <Route exact path="/"
                                component={Home} />
-
+                        <Route path="/register"
+                               component={RegisterUserContainer}/>
                         <Route path="/login"
                                component={LoginComponent} />
                         <Route path="/:userid/home"
                                component={UserHomeContainer} />
+                        <Route path="/critic/:userid/home"
+                               component={CriticHomeContainer} />
                         <Route path="/:userid/profile"
                                component={UserProfile} />
+
                     </div>
                 </Router>
             </div>

@@ -74,8 +74,7 @@ class UserServiceClient {
         }).then(response=>response.json())
     }
 
-    static getProfile()
-{
+    static getProfile() {
     return fetch(heroku+'profile',{
         method:'GET',
         credentials:'include'
@@ -93,7 +92,8 @@ class UserServiceClient {
         //
         // }
 
-}}
+    }
+}
 
 
 export default UserServiceClient;
