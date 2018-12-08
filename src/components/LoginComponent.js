@@ -5,20 +5,31 @@ import {Redirect} from 'react-router-dom'
 export default class LoginComponent extends Component{
     username = '';
     password = '';
+
     state = {
-        redirect: false
+        redirect: false,
+        user:''
     }
     login(username,password){
-        UserServiceClient.login(username,password)
-        this.setState({
-            redirect:true
-        })
+
+        (UserServiceClient.login(username,password)).
+        then(user=>
+        {if (user.username.length>0){
+            this.setState({
+                redirect:true,
+                user:user
+            })}})
+
+
     }
 
     render(){
         if(this.state.redirect === true){
-            return <Redirect to = '/1/home'/>
-        }
+            return <Redirect
+                to={{
+                    pathname:  "/" + this.state.user._id+ "/home",
+
+                }}/>
         return (
             <div>
                 <Jumbotron fluid className="bg-light">
