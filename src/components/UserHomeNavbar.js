@@ -6,7 +6,8 @@ export default class UserHomeNavbar extends Component {
         super(props);
         this.state = {
 
-            userId:''
+            userId:'',
+            userType:''
         };
 
         this.setUserId = this.setUserId.bind(this)
@@ -18,7 +19,7 @@ export default class UserHomeNavbar extends Component {
         this.setState({userId:userId})
     }
     componentDidMount() {
-        UserServiceClient.getProfile().then(user => this.setUserId(user._id))
+        UserServiceClient.getProfile().then(user => this.setUserId(user._id,user.type))
 
     }
 
@@ -50,8 +51,9 @@ export default class UserHomeNavbar extends Component {
                                 <Link to="/" className="nav-link">Recently Added</Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/" className="nav-link">My List</Link>
+                                <Link to="/" className="nav-link">Watch List</Link>
                             </li>
+
                         </ul>
                         <form className="form-inline my-2 my-lg-0">
                             <input className="form-control mr-sm-2"
@@ -66,7 +68,7 @@ export default class UserHomeNavbar extends Component {
                         <div className="float-right">
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item">
-                                <Link to={'/'+this.state.userId+'/profile'}
+                                <Link to={'/profile/'+this.state.userId}
                                       className="nav-link">
                                     <i className="fa fa-user"></i>
                                 </Link>

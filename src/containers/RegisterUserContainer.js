@@ -158,7 +158,7 @@ export default class RegisterUserContainer extends Component{
 
                         <div className="form-group row">
                             <div className="col-sm-8 my-2">
-                                <Link to={"/"+this.state.user.id+"/profile"}>
+                                <Link to={"/profile/"+this.state.userId}>
                                     <button className="btn btn-success btn-block">
                                         Sign up
                                     </button>

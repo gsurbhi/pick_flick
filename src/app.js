@@ -25,7 +25,7 @@ export default class App extends React.Component{
                                component={UserHomeContainer} />
                         <Route path="/critic/:userid/home"
                                component={CriticHomeContainer} />
-                        <Route path="/:userid/profile"
+                        <Route path="/profile/:userid"
                                component={UserProfile} />
 
                     </div>
