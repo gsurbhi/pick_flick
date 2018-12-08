@@ -9,7 +9,6 @@ export default class RegisterUserContainer extends Component{
         this.userService = UserServiceClient.instance;
         this.state = {
             user: {
-                id:'',
                 username: '',
                 firstName: '',
                 lastName: '',
@@ -19,25 +18,30 @@ export default class RegisterUserContainer extends Component{
                 phone: '',
             }
         }
-        this.updateField = this.updateField.bind(this);
     }
     componentDidMount(){ }
+
+
+    register(user){
+        let e = UserServiceClient.register(user)
+        console.log(e)
+    }
 
     updatefields(type,e){
 
         if(type=='username'){
             this.state.user.username = e;
-            let nuser = this.state.user
+            let nuser = this.state.user;
             this.setState({user: nuser})
         }
         if(type=='password'){
             this.state.user.password = e;
-            let nuser = this.state.user
+            let nuser = this.state.user;
             this.setState({user: nuser})
         }
         if(type=='firstname'){
             this.state.user.firstName = e;
-            let nuser = this.state.user
+            let nuser = this.state.user;
             this.setState({user: nuser})
         }
         if(type=='lastname'){
@@ -69,10 +73,7 @@ export default class RegisterUserContainer extends Component{
 
 
     }
-    updateField(portion,target){
-        console.log(portion)
-        console.log(target)
-    }
+
 
 
     render(){
@@ -98,6 +99,7 @@ export default class RegisterUserContainer extends Component{
                             <div className="col-sm-8">
                                 <input className="form-control"
                                        id="username"
+                                       onChange={(e)=> this.updatefields('username',e.target.value)}
                                        value={this.state.user.username}/>
                             </div>
                         </div>
@@ -112,7 +114,7 @@ export default class RegisterUserContainer extends Component{
                                 <input className="form-control"
                                        type="password"
                                        id="password"
-                                       onChange={(e)=> this.updateField("password",e.target.value)}
+                                       onChange={(e)=> this.updatefields("password",e.target.value)}
                                        value={this.state.user.password}/>
                             </div>
                         </div>
@@ -127,7 +129,7 @@ export default class RegisterUserContainer extends Component{
                                 <input className="form-control"
                                        type="text"
                                        id="firstName"
-                                       onChange={(e)=> this.updateField("firstName",e.target.value)}
+                                       onChange={(e)=> this.updatefields("firstname",e.target.value)}
                                        value={this.state.user.firstName}/>
                             </div>
                         </div>
@@ -142,6 +144,7 @@ export default class RegisterUserContainer extends Component{
                                 <input className="form-control"
                                        type="text"
                                        id="lName"
+                                       onChange={(e)=> this.updatefields('lastname',e.target.value)}
                                        value={this.state.user.lastName}/>
                             </div>
                         </div>
@@ -156,6 +159,7 @@ export default class RegisterUserContainer extends Component{
                                 <input className="form-control"
                                        type="email"
                                        id="email"
+                                       onChange={(e)=> this.updatefields('email',e.target.value)}
                                        value={this.state.user.email}/>
                             </div>
                         </div>
@@ -170,6 +174,7 @@ export default class RegisterUserContainer extends Component{
                                 <input className="form-control"
                                        type="date"
                                        id="dob"
+                                       onChange={(e)=> this.updatefields('dob',e.target.value)}
                                        value={this.state.user.dob}/>
                             </div>
                         </div>
@@ -184,6 +189,7 @@ export default class RegisterUserContainer extends Component{
                                 <input className="form-control"
                                        type="phone"
                                        id="phone"
+                                       onChange={(e)=> this.updatefields('phone',e.target.value)}
                                        value={this.state.user.phone}/>
                             </div>
                         </div>
@@ -198,6 +204,7 @@ export default class RegisterUserContainer extends Component{
                                 <input className="form-control"
                                        type="text"
                                        id="city"
+                                       onChange={(e)=> this.updatefields('city',e.target.value)}
                                        value={this.state.user.city}/>
                             </div>
                         </div>
@@ -205,7 +212,8 @@ export default class RegisterUserContainer extends Component{
                         <div className="form-group row">
                             <div className="col-sm-8 my-2">
                                 <Link to={"/profile/"+this.state.userId}>
-                                    <button className="btn btn-success btn-block">
+                                    <button className="btn btn-success btn-block"
+                                    onClick={() => this.register(this.state.user)}>
                                         Sign up
                                     </button>
                                 </Link>
