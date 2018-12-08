@@ -31,9 +31,7 @@ export default class UserProfile extends Component{
                     courses:user.courses
                 })
             })*/
-       this.setState({
-            user:this.userService.getProfile()
-        });
+       UserServiceClient.getProfile().then(user=> this.setState({user:user}))
     }
 
     updateField(portion,target){
@@ -67,7 +65,7 @@ export default class UserProfile extends Component{
                             <div className="col-sm-8">
                                 <input className="form-control"
                                        id="username"
-                                       value={this.state.user.username}
+                                       value={this.state.user.firstName}
                                        readOnly />
                             </div>
                         </div>
