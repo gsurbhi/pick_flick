@@ -23,6 +23,52 @@ export default class RegisterUserContainer extends Component{
     }
     componentDidMount(){ }
 
+    updatefields(type,e){
+
+        if(type=='username'){
+            this.state.user.username = e;
+            let nuser = this.state.user
+            this.setState({user: nuser})
+        }
+        if(type=='password'){
+            this.state.user.password = e;
+            let nuser = this.state.user
+            this.setState({user: nuser})
+        }
+        if(type=='firstname'){
+            this.state.user.firstName = e;
+            let nuser = this.state.user
+            this.setState({user: nuser})
+        }
+        if(type=='lastname'){
+            this.state.user.lastName = e;
+            let nuser = this.state.user
+            this.setState({user: nuser})
+        }
+        if(type=='email'){
+            this.state.user.email = e;
+            let nuser = this.state.user
+            this.setState({user: nuser})
+        }
+        if(type=='phone'){
+            this.state.user.phone = e;
+            let nuser = this.state.user
+            this.setState({user: nuser})
+        }
+        if(type=='city'){
+            this.state.user.city = e;
+            let nuser = this.state.user
+            this.setState({user: nuser})
+        }
+        if(type=='dob'){
+            this.state.user.dob = e;
+            let nuser = this.state.user
+            this.setState({user: nuser})
+        }
+
+
+
+    }
     updateField(portion,target){
         console.log(portion)
         console.log(target)
