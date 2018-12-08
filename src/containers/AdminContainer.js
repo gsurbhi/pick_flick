@@ -96,7 +96,7 @@ export default class AdminContainer extends React.Component {
                         <td>
                             <button type='btn'
                                     className="btn btn-success btn-block"
-                                    onClick={() => this.UpdateUser()}>
+                                    onClick={() => this.updateUser()}>
                                 Create
                             </button>
                         </td>
@@ -190,7 +190,7 @@ export default class AdminContainer extends React.Component {
                                 </button>
                                 <button type='btn'
                                         className="btn btn-danger w-100"
-                                        onClick={() => this.props.deleteUser(user._id)}>
+                                        onClick={() => this.deleteUser(user._id)}>
                                     Delete
                                 </button>
                             </td>
@@ -202,7 +202,7 @@ export default class AdminContainer extends React.Component {
     }
 
     deleteUser(id) {
-        this.props.deleteUser(id);
+        AdminServiceClient.deleteUser(id);
         this.username = '';
         this.firstName = '';
         this.lastName = '';
@@ -213,7 +213,7 @@ export default class AdminContainer extends React.Component {
         this.password = '';
     }
 
-    UpdateUser(id) {
+    updateUser(id) {
         let user = {
             _id: id,
             username: this.username,
@@ -225,7 +225,7 @@ export default class AdminContainer extends React.Component {
             phone: this.phone,
             password: this.password
         };
-        this.props.updateUser(user);
+        AdminServiceClient.updateUser(user);
         this.selectUser('');
     }
 
