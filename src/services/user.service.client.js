@@ -44,11 +44,15 @@ class UserServiceClient {
     }
 
     static register(user){
+        var newuser = user
         return fetch(heroku+'register',{
+            headers:{
+                'Content-type': 'application/json'
+            },
             method:'POST',
+            body:JSON.stringify(newuser),
             credentials:'include',
-            body: JSON.stringify(user),
-        }).then(response=>response.json())
+        }).then(response=>"registered")
 
     }
 
@@ -56,7 +60,7 @@ class UserServiceClient {
         return fetch(heroku+'user',{
             method:'POST',
             credentials:'include',
-            body: JSON.stringify(user),
+            body:JSON.stringify(user),
         }).then(response=>response.json())
     }
 

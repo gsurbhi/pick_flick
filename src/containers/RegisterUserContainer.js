@@ -23,7 +23,8 @@ export default class RegisterUserContainer extends Component{
 
 
     register(user){
-        let e = UserServiceClient.register(user)
+        console.log(this.state.user.username)
+        let e = UserServiceClient.register(this.state.user)
         console.log(e)
     }
 
