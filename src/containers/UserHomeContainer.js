@@ -13,11 +13,9 @@ export default class UserHomeContainer extends Component{
         super(props);
         this.state = {
             watchList: [],
-            popularMovies:[],
             favoriteMovies:[],
             dislikedMovies:[]
         };
-        this.setPopularMovies = this.setPopularMovies.bind(this)
         this.setFavoriteMovies = this.setFavoriteMovies.bind(this)
         this.setWatchListState = this.setWatchListState.bind(this)
         this.addMovieToUserWatchList = this.addMovieToUserWatchList.bind(this)
@@ -111,13 +109,16 @@ export default class UserHomeContainer extends Component{
                     <h5>Trending now </h5>
                     <div className="row">
                         {
-                            this.state.popularMovies.map((movie,index) => {
+                            this.state.popularMovies && this.state.popularMovies.map((movie,index) => {
                                 return <div className="col-lg-2 col-md-4 col-sm-12">
+                                        {movie &&
                                             <UserHomeMovieCards
                                                 key={index}
                                                 movie={movie}
                                                 addMovieToUserWatchList={this.addMovieToUserWatchList}
-                                                favoriteMovie={this.favoriteMovie}/>
+                                                favoriteMovie={this.favoriteMovie}
+                                                dislikeMovie={this.dislikeMovie}/>
+                                        }
                                         </div>
                             })
                         }

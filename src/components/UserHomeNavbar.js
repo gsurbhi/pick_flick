@@ -1,17 +1,22 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Redirect,Link} from 'react-router-dom';
 import UserServiceClient from '../services/user.service.client'
-import MovieServiceClient from "../services/movie.service.client";
+
 export default class UserHomeNavbar extends Component {
     constructor(props){
         super(props);
         this.state = {
 
             userId:'',
-            userType:''
+            userType:'',
+            searchTerm:'',
+            movies:[]
         };
+
         this.setUserId = this.setUserId.bind(this)
         this.logout = this.logout.bind(this)
+        this.getSearchTerm = this.getSearchTerm.bind(this)
+        this.searchResults = this.searchResults.bind(this)
 
     }
 
@@ -32,17 +37,27 @@ export default class UserHomeNavbar extends Component {
 
     }
 
+    getSearchTerm(term){
+        console.log(term)
+        this.setState({
+            searchTerm:term
+        });
+    }
+
+    searchResults(){
+        console.log("Sfdsfs")
+        window.location.href='/search/'+this.state.searchTerm
+    }
+
     render(){
         return(
             <div>
 
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-
                     {
                         this.state.userType === 'Critic' &&
                         <Link to={"/critic"+this.state.userId+"/home"} className="navbar-brand" >
-                            <i className="fa fa-video-camera pr-1 text-warning">
-                            </i>
+                            <i className="fa fa-video-camera pr-1 text-warning"></i>
                             PickFlick
                         </Link>
                     }
@@ -50,8 +65,7 @@ export default class UserHomeNavbar extends Component {
                     {
                         this.state.userType !== 'Critic' &&
                     <Link to={"/" + this.state.userId + "/home"} className="navbar-brand">
-                        <i className="fa fa-video-camera pr-1 text-warning">
-                        </i>
+                        <i className="fa fa-video-camera pr-1 text-warning"></i>
                         PickFlick
                     </Link>
                     }
@@ -87,12 +101,13 @@ export default class UserHomeNavbar extends Component {
                             <input className="form-control mr-sm-2"
                                    type="search"
                                    placeholder="type something.."
-                                   aria-label="Search" />
-                                <button className="btn btn-outline-success my-2 my-sm-0"
-                                        type="submit">
-                                    Search
-                                </button>
+                                   aria-label="Search"
+                                   onChange={(e) => this.getSearchTerm(e.target.value)} />
                         </form>
+                        <button className="btn btn-outline-success my-2 my-sm-0"
+                                onClick={() => this.searchResults()}>
+                            Search
+                        </button>
                         <div className="float-right">
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item">
