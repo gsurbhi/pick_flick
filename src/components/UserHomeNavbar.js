@@ -18,7 +18,7 @@ export default class UserHomeNavbar extends Component {
     setUserId(userId,type){
         this.setState({
             userId:userId,
-            userType:type
+            userType: type
         });
     }
     componentDidMount() {
@@ -37,11 +37,24 @@ export default class UserHomeNavbar extends Component {
             <div>
 
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <Link to="/" className="navbar-brand" >
+
+                    {
+                        this.state.userType === 'Critic' &&
+                        <Link to={"/critic"+this.state.userId+"/home"} className="navbar-brand" >
+                            <i className="fa fa-video-camera pr-1 text-warning">
+                            </i>
+                            PickFlick
+                        </Link>
+                    }
+
+                    {
+                        this.state.userType !== 'Critic' &&
+                    <Link to={"/" + this.state.userId + "/home"} className="navbar-brand">
                         <i className="fa fa-video-camera pr-1 text-warning">
                         </i>
                         PickFlick
                     </Link>
+                    }
                     <button className="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
