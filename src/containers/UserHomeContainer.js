@@ -128,10 +128,12 @@ export default class UserHomeContainer extends Component{
                         {
                             this.state.watchList && this.state.watchList.map((movie,index) => {
                                 return <div className="col-lg-2 col-md-4 col-sm-12">
-                                    <UserListCards
+                                        {   movie &&
+                                        <UserListCards
                                         key={index}
                                         movie={movie}
                                         deleteFromUserWatchList={this.deleteFromUserWatchList}/>
+                                        }
                                 </div>
                             })
                         }
@@ -139,11 +141,14 @@ export default class UserHomeContainer extends Component{
                     <h5>My Favorite Movies</h5>
                     <div className="row m-1">
                         {
-                            this.state.favoriteMovies && this.state.favoriteMovies.map((movie) => {
+                            this.state.favoriteMovies && this.state.favoriteMovies.map((movie,index) => {
                                 return <div className="col-lg-2 col-md-4 col-sm-12">
+                                        { movie &&
                                     <UserListCards
+                                        key={index}
                                         movie={movie}
                                         deleteFromUserWatchList={this.dislikeMovie}/>
+                                        }
                                 </div>
                             })
                         }
