@@ -5,13 +5,13 @@ class MovieServiceClient {
     static getFavouriteMovies() {
         return fetch(HEROKU_URL + 'movie/favourites', {
             credentials: 'include'
-        })
+        }).then(response => response.json())
     }
 
     static getWatchlistMovies() {
         return fetch(HEROKU_URL + 'movie/watchlist', {
             credentials: 'include'
-        })
+        }).then(response => response.json())
     }
 
     static saveDislike(movie) {
@@ -55,6 +55,17 @@ class MovieServiceClient {
 
     static setWatchListMovies(movie){
         return fetch(HEROKU_URL + 'movie/'+movie.id+'/watchlist', {
+            method:'post',
+            credentials: 'include',
+            body: JSON.stringify(movie),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    }
+
+    static favouriteMovies(movie) {
+        return fetch(HEROKU_URL + 'movie/'+movie.id+'/favourite', {
             method:'post',
             credentials: 'include',
             body: JSON.stringify(movie),

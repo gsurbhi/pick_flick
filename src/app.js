@@ -4,7 +4,6 @@ import Home from "./containers/Home";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import UserHomeContainer from "./containers/UserHomeContainer";
 import UserProfile from "./containers/UserProfile";
-import CriticHomeMovieCards from "./components/CriticHomeMovieCards";
 import CriticHomeContainer from "./containers/CriticHomeContainer";
 import RegisterUserContainer from "./containers/RegisterUserContainer";
 import AdminContainer from "./containers/AdminContainer";

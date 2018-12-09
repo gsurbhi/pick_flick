@@ -12,16 +12,17 @@ export default class UserHomeContainer extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            movies: [],
-            usersList: [],
             watchList: [],
-            popularMovies:[]
+            popularMovies:[],
+            favoriteMovies:[],
+            dislikedMovies:[]
         };
-        this.userPageService = new UserPageService();
         this.setPopularMovies = this.setPopularMovies.bind(this)
-        this.addMovieToUserWatchList = this.addMovieToUserWatchList.bind(this)
+        this.setFavoriteMovies = this.setFavoriteMovies.bind(this)
         this.setWatchListState = this.setWatchListState.bind(this)
-
+        this.addMovieToUserWatchList = this.addMovieToUserWatchList.bind(this)
+        this.favoriteMovie = this.favoriteMovie.bind(this)
+        this.dislikeMovie = this.dislikeMovie.bind(this)
     }
 
     setPopularMovies(movies){
@@ -33,37 +34,69 @@ export default class UserHomeContainer extends Component{
     }
 
     setWatchListState(movies){
-        console.log(movies)
         this.setState({
             watchList:movies
         })
 
     }
 
+    setFavoriteMovies(movies){
+        this.setState({
+            favoriteMovies:movies
+        })
+    }
     componentDidMount(){
         MovieApiClient.findPopularMovies().then(movies => this.setPopularMovies(movies.results))
-        MovieServiceClient.getWatchlistMovies().then(movies => console.log(movies))
-        this.setState({
-            movies: this.userPageService.getTrendingMovies(),
-            usersList: this.userPageService.getUsersList()
-        })
-    }
+        MovieServiceClient.getWatchlistMovies().then(movies => this.setWatchListState(movies.watchList))
+        MovieServiceClient.getFavouriteMovies().then(movies => this.setFavoriteMovies(movies.favourites))
+}
 
-    addToList = (movie) => {
-        this.userPageService.addToUsersList(movie)
-        this.setState({
-            usersList: this.userPageService.getUsersList()
-        })
-    }
 
     addMovieToUserWatchList(movie){
-        MovieServiceClient.setWatchListMovies(movie).then(movies =>console.log(movies))
+        MovieServiceClient.setWatchListMovies(movie).then(response=>
+        {
+            if (response.status !== 200) {
+                alert("Internal Server Error, Try Again")
+            }
+            else {
+                MovieServiceClient.getWatchlistMovies().then(movies=>this.setWatchListState(movies.watchList))
+            }
+        })
     }
 
     deleteFromUserWatchList = (movie) => {
-        MovieServiceClient.removeMovieFromWatchlist(movie)
-        this.setState({
-            watchList: MovieServiceClient.getWatchlistMovies()
+        MovieServiceClient.removeMovieFromWatchlist(movie).then(response=>
+        {
+            if (response.status !== 200) {
+                alert("Internal Server Error, Try Again")
+            }
+            else {
+                MovieServiceClient.getWatchlistMovies().then(movies=>this.setWatchListState(movies.watchList))
+            }
+        })
+    }
+
+    favoriteMovie(movie){
+        MovieServiceClient.favouriteMovies(movie).then(response=>
+        {
+            if (response.status !== 200) {
+                alert("Internal Server Error, Try Again")
+            }
+            else {
+                MovieServiceClient.getFavouriteMovies().then(movies => this.setFavoriteMovies(movies.favourites))
+            }
+        })
+    }
+
+    dislikeMovie(movie){
+        MovieServiceClient.saveDislike(movie).then(response=>
+        {
+            if (response.status !== 200) {
+                alert("Internal Server Error, Try Again")
+            }
+            else {
+                MovieServiceClient.getFavouriteMovies().then(movies => this.setFavoriteMovies(movies.favourites))
+            }
         })
     }
 
@@ -83,22 +116,34 @@ export default class UserHomeContainer extends Component{
                                             <UserHomeMovieCards
                                                 key={index}
                                                 movie={movie}
-                                                addMovieToUserWatchList={this.addMovieToUserWatchList}/>
+                                                addMovieToUserWatchList={this.addMovieToUserWatchList}
+                                                favoriteMovie={this.favoriteMovie}/>
                                         </div>
                             })
                         }
                     </div>
 
-
+                    <h5>My WatchList </h5>
                     <div className="row">
                         {
-                            this.state.watchList && <h5>My WatchList </h5>
-                            && this.state.watchList.map((movie,index) => {
+                            this.state.watchList && this.state.watchList.map((movie,index) => {
                                 return <div className="col-lg-2 col-md-4 col-sm-12">
                                     <UserListCards
                                         key={index}
                                         movie={movie}
                                         deleteFromUserWatchList={this.deleteFromUserWatchList}/>
+                                </div>
+                            })
+                        }
+                    </div>
+                    <h5>My Favorite Movies</h5>
+                    <div className="row m-1">
+                        {
+                            this.state.favoriteMovies && this.state.favoriteMovies.map((movie) => {
+                                return <div className="col-lg-2 col-md-4 col-sm-12">
+                                    <UserListCards
+                                        movie={movie}
+                                        deleteFromUserWatchList={this.dislikeMovie}/>
                                 </div>
                             })
                         }
