@@ -15,11 +15,7 @@ export default class LoginHomeContainer extends Component{
             watchList: [],
             popularMovies:[]
         };
-        this.userPageService = new UserPageService();
         this.setPopularMovies = this.setPopularMovies.bind(this)
-        this.addMovieToUserWatchList = this.addMovieToUserWatchList.bind(this)
-        this.setWatchListState = this.setWatchListState.bind(this)
-
     }
 
     setPopularMovies(movies){
@@ -27,35 +23,13 @@ export default class LoginHomeContainer extends Component{
         this.setState({
             popularMovies:truncatedMoviesList
         })
-
     }
 
-    setWatchListState(movies){
-        console.log(movies)
-        this.setState({
-            watchList:movies
-        })
-
-    }
-
-    addMovieToUserWatchList(movie){
-        MovieServiceClient.setWatchListMovies(movie).then(movies =>console.log(movies))
-    }
-
-    deleteFromUserWatchList = (movie) => {
-        MovieServiceClient.removeMovieFromWatchlist(movie)
-        this.setState({
-            watchList: MovieServiceClient.getWatchlistMovies()
-        })
-    }
     componentDidMount(){
         MovieApiClient.findPopularMovies().then(movies => this.setPopularMovies(movies.results))
-        MovieServiceClient.getWatchlistMovies().then(movies => console.log(movies))
-        this.setState({
-            movies: this.userPageService.getTrendingMovies(),
-            usersList: this.userPageService.getUsersList()
-        })
     }
+
+
     render() {
 
         return(
@@ -66,28 +40,14 @@ export default class LoginHomeContainer extends Component{
                     <h5>Trending now </h5>
                     <div className="row">
                         {
-                            this.state.popularMovies.map((movie,index) => {
+                            this.state.popularMovies && this.state.popularMovies.map((movie,index) => {
                                 return <div className="col-lg-2 col-md-4 col-sm-12">
+                                    {movie &&
                                     <CriticHomeMovieCards
                                         key={index}
-                                        movie={movie}
-                                        addMovieToUserWatchList={this.addMovieToUserWatchList}/>
-                                </div>
-                            })
-                        }
-                    </div>
+                                        movie={movie}/>
+                                    }
 
-
-                    <div className="row">
-                        {
-                            this.state.watchList &&
-                            <h5>My WatchList </h5> &&
-                            this.state.watchList.map((movie,index) => {
-                                return <div className="col-lg-2 col-md-4 col-sm-12">
-                                    <CriticListCards
-                                        key={index}
-                                        movie={movie}
-                                        deleteFromUserWatchList={this.deleteFromUserWatchList}/>
                                 </div>
                             })
                         }

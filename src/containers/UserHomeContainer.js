@@ -3,10 +3,10 @@ import UserHomeNavbar from "../components/UserHomeNavbar";
 import {Row,Container} from 'reactstrap';
 import MovieService from "../services/MovieService";
 import UserHomeMovieCards from "../components/UserHomeMovieCards";
-import UserPageService from "../services/user.page.service.client"
 import UserListCards from "../components/UserListCards";
 import MovieApiClient from "../services/mapi.service.client";
 import MovieServiceClient from "../services/movie.service.client";
+import {Link} from 'react-router-dom';
 
 export default class UserHomeContainer extends Component{
     constructor(props) {
@@ -16,6 +16,7 @@ export default class UserHomeContainer extends Component{
             favoriteMovies:[],
             dislikedMovies:[]
         };
+        this.setPopularMovies = this.setPopularMovies.bind(this)
         this.setFavoriteMovies = this.setFavoriteMovies.bind(this)
         this.setWatchListState = this.setWatchListState.bind(this)
         this.addMovieToUserWatchList = this.addMovieToUserWatchList.bind(this)
@@ -28,7 +29,6 @@ export default class UserHomeContainer extends Component{
         this.setState({
             popularMovies:truncatedMoviesList
         })
-
     }
 
     setWatchListState(movies){
@@ -47,7 +47,7 @@ export default class UserHomeContainer extends Component{
         MovieApiClient.findPopularMovies().then(movies => this.setPopularMovies(movies.results))
         MovieServiceClient.getWatchlistMovies().then(movies => this.setWatchListState(movies.watchList))
         MovieServiceClient.getFavouriteMovies().then(movies => this.setFavoriteMovies(movies.favourites))
-}
+    }
 
 
     addMovieToUserWatchList(movie){
@@ -75,6 +75,7 @@ export default class UserHomeContainer extends Component{
     }
 
     favoriteMovie(movie){
+        console.log(movie)
         MovieServiceClient.favouriteMovies(movie).then(response=>
         {
             if (response.status !== 200) {
@@ -120,6 +121,7 @@ export default class UserHomeContainer extends Component{
                                                 dislikeMovie={this.dislikeMovie}/>
                                         }
                                         </div>
+
                             })
                         }
                     </div>
