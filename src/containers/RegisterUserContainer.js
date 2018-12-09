@@ -16,6 +16,7 @@ export default class RegisterUserContainer extends Component{
                 dob: '',
                 city: '',
                 phone: '',
+                type:''
             }
         }
     }
@@ -37,6 +38,11 @@ export default class RegisterUserContainer extends Component{
         }
         if(type=='password'){
             this.state.user.password = e;
+            let nuser = this.state.user;
+            this.setState({user: nuser})
+        }
+        if(type=='type'){
+            this.state.user.type = e;
             let nuser = this.state.user;
             this.setState({user: nuser})
         }
@@ -117,6 +123,27 @@ export default class RegisterUserContainer extends Component{
                                        id="password"
                                        onChange={(e)=> this.updatefields("password",e.target.value)}
                                        value={this.state.user.password}/>
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <label htmlFor="usertype"
+                                   className="col-sm-2 col-form-label">
+                                User Type
+                            </label>
+                        </div>
+                        <div className="form-group row">
+                            <div className="col-sm-8">
+                                <select name="userType"
+                                        className="form-control"
+                                        type="dropdown"
+                                        id="password"
+                                        onChange={(e)=> this.updatefields('type',e.target.value)}>
+                                    value={this.state.user.type}/>
+                                    <option value="fan">Fan</option>
+                                    <option value="critic">Critic</option>
+                                    <option value="Actor">Actor</option>
+                                </select>
+
                             </div>
                         </div>
                         <div className="form-group row">
