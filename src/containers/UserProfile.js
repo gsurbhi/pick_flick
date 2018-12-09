@@ -18,22 +18,22 @@ export default class UserProfile extends Component{
                 phone: '',
             }
         }
-        this.updateField = this.updateField.bind(this);
+
     }
     componentDidMount(){
-
-       UserServiceClient.getProfile().then(user=> this.setState({user:user}))
-
-    }
-
-    updateField(portion,target){
-
-        this.state.update()
+       UserServiceClient.getProfile().then(user=> this.setUser(user))
 
     }
+
+    setUser(user){
+        this.setState({user:user})
+        console.log(this.state.user)
+    }
+
+
+
 
     updatefields(type,e){
-
         if(type=='username'){
             this.state.user.username = e;
             let nuser = this.state.user
@@ -74,24 +74,18 @@ export default class UserProfile extends Component{
             let nuser = this.state.user
             this.setState({user: nuser})
         }
-
-
-
     }
 
     logout(){
         UserServiceClient.logout().then(()=>{
             window.location.href='/'
         })
-
     }
 
     updateProfile(){
-        console.log(this.state.user)
-        UserServiceClient.updateProfile(this.state.user)
-        UserServiceClient.getProfile().then(user=> this.setState({user:user}))
-
-
+console.log(this.state.user)
+         UserServiceClient.updateProfile(this.state.user)
+         UserServiceClient.getProfile().then(user=> this.setUser(user))
     }
 
 
@@ -238,7 +232,7 @@ export default class UserProfile extends Component{
                                     </button>
                                 </Link>
                             </div>
-                            <div className="col-sm-8">
+                            <div className="col-sm-8 my-2">
                                 <Link to="/">
                                     <button className="btn btn-danger btn-block"
                                     onClick={this.logout}>
@@ -246,14 +240,19 @@ export default class UserProfile extends Component{
                                     </button>
                                 </Link>
                             </div>
-                            <div className="col-sm-8">
-                                    <button className="btn btn-warning btn-block"
-                                    onClick={this.updateProfile}>
-                                        Update Profile
-                                    </button>
-                            </div>
+
+
                         </div>
+
                     </form>
+                    <div className="col-sm-8 my-2">
+
+                        <button className="btn btn-danger btn-block"
+                        onClick={()=>this.updateProfile()}>
+                            Logout
+                        </button>
+
+                    </div>
                 </div>
             </div>
         )
