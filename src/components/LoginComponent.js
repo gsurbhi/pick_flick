@@ -30,11 +30,11 @@ export default class LoginComponent extends Component{
 
     render() {
         if (this.state.redirect === true) {
-            return (<Redirect
-                to={{
+            return (
+                <Redirect to={{
                     pathname: "/" + this.state.user._id + "/home",
-
-                }}/>)}
+                }}/>)
+        }
             return (
                 <div>
                     <Jumbotron fluid className="bg-light">

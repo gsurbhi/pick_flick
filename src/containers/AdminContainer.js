@@ -14,7 +14,8 @@ export default class AdminContainer extends React.Component {
         };
 
         this.renderUsers = this.renderUsers.bind(this);
-
+        this.deleteUser = this.deleteUser.bind(this);
+        this.setUsers = this.setUsers.bind(this);
     }
 
     setUsers(users){
@@ -133,7 +134,7 @@ export default class AdminContainer extends React.Component {
                             <td>
                                 <button type='btn'
                                         className="btn btn-outline-info w-100"
-                                        onClick={() => this.selectUser(user._id)}>
+                                        onClick={() => this.selectUser(user)}>
                                     <i className="fa fa-pencil"></i>
                                 </button>
                                 <button type='btn'
@@ -152,6 +153,9 @@ export default class AdminContainer extends React.Component {
     deleteUser(id) {
         if(id != this.state.userId) {
             AdminServiceClient.deleteUser(id);
+            setTimeout(() => {AdminServiceClient.getUsers().then(users1 =>  this.setState({users:users1}))}, 500)
+
+
         }
         else {
             alert("You cannot delete your account")
@@ -182,7 +186,8 @@ export default class AdminContainer extends React.Component {
         this.selectUser('');
     }
 
-    selectUser(id) {
-        this.setState({userId: id});
+    selectUser(user) {
+        console.log(user)
+        this.setState({userId: user._id});
     }
 }
