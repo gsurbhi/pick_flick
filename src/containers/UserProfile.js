@@ -16,6 +16,7 @@ export default class UserProfile extends Component{
                 dob: '',
                 city: '',
                 phone: '',
+                type:'Fan'
             }
         }
 
@@ -27,7 +28,6 @@ export default class UserProfile extends Component{
 
     setUser(user){
         this.setState({user:user})
-        console.log(this.state.user)
     }
 
 
@@ -40,7 +40,7 @@ export default class UserProfile extends Component{
             this.setState({user: nuser})
         }
         if(type=='type'){
-            this.state.user.username = e;
+            this.state.user.type = e;
             let nuser = this.state.user
             this.setState({user: nuser})
         }
@@ -88,9 +88,11 @@ export default class UserProfile extends Component{
     }
 
     updateProfile(){
-console.log(this.state.user)
+         console.log(this.state.user)
          UserServiceClient.updateProfile(this.state.user)
-         UserServiceClient.getProfile().then(user=> this.setUser(user))
+        setTimeout(()=>UserServiceClient.getProfile().then(user=> this.setUser(user)), 500)
+         console.log(this.state.user.firstName)
+
     }
 
 
@@ -150,7 +152,7 @@ console.log(this.state.user)
                                 <select name="userType"
                                         className="form-control"
                                         type="dropdown"
-                                        id="password"
+                                        id="type"
                                         onChange={(e)=> this.updatefields('type',e.target.value)}>
                                         value={this.state.user.password}/>
                                     <option value="fan">Fan</option>
@@ -271,11 +273,11 @@ console.log(this.state.user)
                         </div>
 
                     </form>
-                    <div className="col-sm-8 my-2">
+                    <div className="form-group row col-sm-8">
 
-                        <button className="btn btn-danger btn-block"
+                        <button className="btn btn-warning btn-block"
                         onClick={()=>this.updateProfile()}>
-                            Logout
+                            Update
                         </button>
 
                     </div>

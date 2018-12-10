@@ -16,7 +16,7 @@ export default class RegisterUserContainer extends Component{
                 dob: '',
                 city: '',
                 phone: '',
-                type:''
+                type:'Fan'
             }
         }
     }
@@ -25,8 +25,14 @@ export default class RegisterUserContainer extends Component{
 
     register(user){
         console.log(this.state.user.username)
-        let e = UserServiceClient.register(this.state.user)
-        console.log(e)
+        UserServiceClient.register(this.state.user).then(res => {
+
+                UserServiceClient.getProfile().then(user=> window.location.href="/profile/"+user._id)
+
+            
+        })
+
+
     }
 
     updatefields(type,e){
@@ -136,7 +142,7 @@ export default class RegisterUserContainer extends Component{
                                 <select name="userType"
                                         className="form-control"
                                         type="dropdown"
-                                        id="password"
+                                        id="type"
                                         onChange={(e)=> this.updatefields('type',e.target.value)}>
                                     value={this.state.user.type}/>
                                     <option value="fan">Fan</option>
@@ -239,12 +245,12 @@ export default class RegisterUserContainer extends Component{
 
                         <div className="form-group row">
                             <div className="col-sm-8 my-2">
-                                <Link to={"/profile/"+this.state.userId}>
+
                                     <button className="btn btn-success btn-block"
                                     onClick={() => this.register(this.state.user)}>
                                         Sign up
                                     </button>
-                                </Link>
+
                             </div>
                             <div className="col-sm-8">
                                 <Link to="/login">

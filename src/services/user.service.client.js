@@ -55,7 +55,7 @@ class UserServiceClient {
             method:'POST',
             body:JSON.stringify(newuser),
             credentials:'include',
-        }).then(response=>"registered")
+        })
 
     }
 
