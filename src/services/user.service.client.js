@@ -17,13 +17,13 @@ class UserServiceClient {
     static isloggedIn(){
         return fetch(heroku+'login',{
             credentials:'include'
-        }).then(response => console.log("logged out"))
+        })
     }
 
     static isAdmin(){
         return fetch(heroku+'login/isAdmin',{
             credentials:'include'
-        }).then(response => console.log("logged out"))
+        })
     }
 
     static login(username,password) {

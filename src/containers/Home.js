@@ -28,10 +28,11 @@ class Home extends React.Component {
                             </Link>
                             </li>
                         </ul>
+                    </nav>
                     <form className="form-inline">
                         <Search/>
                     </form>
-                    </nav>
+
                 </div>
 
         )

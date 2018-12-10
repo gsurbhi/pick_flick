@@ -1,10 +1,8 @@
 import React from 'react'
 import {Link} from "react-router-dom";
 import MoveiApiServiceClient from "../services/mapi.service.client"
-import MovieCard from "./MovieCard";
 import '../styles/movie.detail.client.css';
 import CriticReview from "./CriticReview";
-
 
 class DetailsPage extends React.Component {
 
@@ -40,7 +38,6 @@ class DetailsPage extends React.Component {
             })
     }
 
-
     render() {
         return (
             <div>
@@ -72,7 +69,7 @@ class DetailsPage extends React.Component {
                     <div>
 
                         <div className='div-background row mt-5'>
-                            <div className='img-content col-lg-3 col-md-4 col-sm-6 ml-5'>
+                            <div className='img-content pl-5'>
                                 <img src={'https://image.tmdb.org/t/p/w500/' + this.state.details.poster_path}/>
                             </div>
                             <div className='col-lg-8 col-md-10 col-sm-12 ml-2'>
@@ -114,7 +111,8 @@ class DetailsPage extends React.Component {
                                             {/*</div>*/}
                                             {/*<div>*/}
                                                 {/*<a href={this.state.details.homepage}>Hello</a>*/}
-                                                <CriticReview movieId ={this.props.match.params.movieId}/>
+                                                <CriticReview movieId ={this.props.match.params.movieId}
+                                                              original_title={this.state.details.original_title}/>
                                             {/*</div>*/}
                                         {/*</div>*/}
                                     </div>
