@@ -7,7 +7,7 @@ const CriticHomeMovieCards = ({movie,addMovieToUserWatchList}) =>
             <img className="card-img-top" src={"https://image.tmdb.org/t/p/w185" + movie.poster_path}/>
                 <div className="card-body">
                     <h5 className="card-title">{movie.title}</h5>
-                    <p className="card-text">.</p>
+                    <p className="card-text text-muted text-truncate">{movie.overview}</p>
                     <button className="btn btn-outline-success btn-sm mr-1">
                         <i className="fa fa-thumbs-up"></i>
                     </button>
