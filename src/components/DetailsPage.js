@@ -1,11 +1,10 @@
 
 import React from 'react'
 import {Link} from "react-router-dom";
-import Search from "./Search";
-import MovieService from "../services/MovieService";
 import MoveiApiServiceClient from "../services/mapi.service.client"
 import MovieCard from "./MovieCard";
 import '../styles/movie.detail.client.css';
+import CriticReview from "./CriticReview";
 
 
 class DetailsPage extends React.Component {
@@ -92,20 +91,6 @@ class DetailsPage extends React.Component {
                                 </div>
                                 <div className='mt-3'>
                                     <div className='row'>
-                                        {/*<div className='col-6'>*/}
-                                            {/*<div className='headers'>*/}
-                                                {/*Genres*/}
-                                            {/*</div>*/}
-                                            {/*<div className='row'>*/}
-                                                {/*{this.state.details.genres.map((genre, index) => {*/}
-                                                    {/*return (*/}
-                                                        {/*<div key={index} className='col-3 ml-2 btn genre-button'>*/}
-                                                            {/*{genre.name}*/}
-                                                        {/*</div>*/}
-                                                    {/*);*/}
-                                                {/*})}*/}
-                                            {/*</div>*/}
-                                        {/*</div>*/}
                                         <div className='col-6'>
                                             <div className='headers'>
                                                 Runtime
@@ -124,14 +109,15 @@ class DetailsPage extends React.Component {
                                                 {this.state.details.original_language}
                                             </div>
                                         </div>
-                                        <div className='col-6'>
-                                            <div className='headers'>
-                                                HomePage
-                                            </div>
-                                            <div>
-                                                <a href={this.state.details.homepage}>{this.state.details.homepage}</a>
-                                            </div>
-                                        </div>
+                                        {/*<div className='col-6'>*/}
+                                            {/*<div className='headers'>*/}
+                                                {/*HomePage*/}
+                                            {/*</div>*/}
+                                            {/*<div>*/}
+                                                {/*<a href={this.state.details.homepage}>Hello</a>*/}
+                                                <CriticReview movieId ={this.props.match.params.movieId}/>
+                                            {/*</div>*/}
+                                        {/*</div>*/}
                                     </div>
                                 </div>
                             </div>
