@@ -148,8 +148,8 @@ export default class UserHomeContainer extends Component{
                             })
                         }
                     </div>
-                    <h5>My Favorite Movies</h5>
-                    <div className="row m-1">
+                    <h5 className="m-1">My Favorite Movies</h5>
+                    <div className="row">
                         {
                             this.state.favoriteMovies && this.state.favoriteMovies.map((movie,index) => {
                                 return <div className="col-lg-2 col-md-4 col-sm-12">

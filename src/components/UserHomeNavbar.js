@@ -92,7 +92,7 @@ export default class UserHomeNavbar extends Component {
                             {
                                 this.state.userType === 'Critic' &&
                                 <li>
-                                    <Link to={"/critic/"+this.state.userId+"/reviews"} className="nav-link">Review List</Link>
+                                    <Link to={"/critic/"+this.state.userId+"/reviews"} className="nav-link">My Reviews</Link>
                                 </li>
                             }
 
