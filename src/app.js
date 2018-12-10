@@ -12,6 +12,7 @@ import CriticReviewContainer from "./containers/CriticReviewContainer";
 import DetailsPage from "./components/DetailsPage";
 import CriticReview from "./components/CriticReview";
 import ReviewsByCritic from "./components/ReviewsByCritic";
+import ExploreMoviesContainer from "./containers/ExploreMoviesContainer";
 
 export default class App extends React.Component{
 
@@ -42,6 +43,7 @@ export default class App extends React.Component{
                                component={ReviewsByCritic}/>
                         <Route path="/details/:movieId"
                                component={DetailsPage}/>
+                        <Route exact path='/explore' component={ExploreMoviesContainer}/>
                     </div>
                 </Router>
             </div>
