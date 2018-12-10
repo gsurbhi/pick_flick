@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
-import './moviecards.css';
 
 const UserHomeMovieCards = ({movie,addMovieToUserWatchList,favoriteMovie,dislikeMovie}) =>
     <div>

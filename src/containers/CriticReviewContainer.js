@@ -80,7 +80,6 @@ export default class CriticReviewContainer extends React.Component {
         // check user is critic only later
         UserServiceClient.getProfile().then(user => this.setUser(user))
         MovieApiClient.findMovieDetails(this.props.match.params.movieid).then(movie => this.setMovie(movie))
-
     }
     render(){
         return(
@@ -97,8 +96,6 @@ export default class CriticReviewContainer extends React.Component {
                             Rating: {this.state.movie.vote_average}
                         </li>
                         <li>Popularity: {this.state.movie.popularity} </li>
-
-
                         <form>
                             <div className="form-group">
 
@@ -119,7 +116,9 @@ export default class CriticReviewContainer extends React.Component {
                                 </textarea>
                             </div>
 
-                            <button className="btn btn-danger"> Cancel </button>
+                            <Link to={"/critic/"+this.state.user._id+"/home"}>
+                                <button className="btn btn-danger"> Cancel </button>
+                            </Link>
                             <button className="btn float-right btn-success"
                             onClick={(e) => {this.submitReviewForCritic()}}>
                                 Submit

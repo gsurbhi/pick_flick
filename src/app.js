@@ -10,6 +10,8 @@ import AdminContainer from "./containers/AdminContainer";
 import SearchResultsPage from "./components/SearchResultsPage";
 import CriticReviewContainer from "./containers/CriticReviewContainer";
 import DetailsPage from "./components/DetailsPage";
+import CriticReview from "./components/CriticReview";
+import ReviewsByCritic from "./components/ReviewsByCritic";
 
 export default class App extends React.Component{
 
@@ -36,6 +38,8 @@ export default class App extends React.Component{
                                component={SearchResultsPage}/>
                         <Route path="/movie/:movieid/review"
                                component={CriticReviewContainer}/>
+                        <Route path="/critic/:userId/reviews"
+                               component={ReviewsByCritic}/>
                         <Route path="/details/:movieId"
                                component={DetailsPage}/>
                     </div>

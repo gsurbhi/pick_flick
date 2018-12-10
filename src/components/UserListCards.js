@@ -11,7 +11,6 @@ return (
             <div className="card-body">
                 <h5 className="card-title">{movie.title}</h5>
                 <Link className='btn btn-outline-info' to={`/movie/${movie.id}`}>View</Link>
-                {/*<p className="card-text">.</p>*/}
                 <button className="btn btn-outline-warning btn-sm mr-1">
                     <i className="fa fa-play"></i>
                 </button>
