@@ -7,6 +7,7 @@ import UserListCards from "../components/UserListCards";
 import MovieApiClient from "../services/mapi.service.client";
 import MovieServiceClient from "../services/movie.service.client";
 import {Link} from 'react-router-dom';
+import UserServiceClient from "../services/user.service.client";
 
 export default class UserHomeContainer extends Component{
     constructor(props) {
@@ -44,6 +45,12 @@ export default class UserHomeContainer extends Component{
         })
     }
     componentDidMount(){
+        UserServiceClient.getProfile().then(user => {
+            if(user.type === 'Critic'){
+                window.location.href='/critic/' + user._id + '/home'
+            }
+
+        });
         MovieApiClient.findPopularMovies().then(movies => this.setPopularMovies(movies.results))
         MovieServiceClient.getWatchlistMovies().then(movies => this.setWatchListState(movies.watchList))
         MovieServiceClient.getFavouriteMovies().then(movies => this.setFavoriteMovies(movies.favourites))
