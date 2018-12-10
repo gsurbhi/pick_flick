@@ -32,7 +32,7 @@ export default class LoginComponent extends Component{
         if (this.state.redirect === true) {
             return (
                 <Redirect to={{
-                    pathname: "/" + this.state.user._id + "/home",
+                    pathname: "/profile/" + this.state.user._id,
                 }}/>)
         }
             return (

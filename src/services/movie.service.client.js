@@ -15,6 +15,7 @@ class MovieServiceClient {
     }
 
     static saveDislike(movie) {
+        console.log(movie)
         return fetch(HEROKU_URL + 'dislikeMovie',{
             method: 'delete',
             credentials: "include",

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import UserServiceClient from "../services/user.service.client"
+import UserHomeNavbar from "../components/UserHomeNavbar";
 export default class UserProfile extends Component{
 
     constructor(props) {
@@ -19,7 +20,6 @@ export default class UserProfile extends Component{
                 type:'Fan'
             }
         }
-
     }
     componentDidMount(){
        UserServiceClient.getProfile().then(user=> this.setUser(user))
@@ -30,51 +30,48 @@ export default class UserProfile extends Component{
         this.setState({user:user})
     }
 
-
-
-
     updatefields(type,e){
-        if(type=='username'){
+        if(type==='username'){
             this.state.user.username = e;
             let nuser = this.state.user
             this.setState({user: nuser})
         }
-        if(type=='type'){
+        if(type==='type'){
             this.state.user.type = e;
             let nuser = this.state.user
             this.setState({user: nuser})
         }
-        if(type=='password'){
+        if(type==='password'){
             this.state.user.password = e;
             let nuser = this.state.user
             this.setState({user: nuser})
         }
-        if(type=='firstname'){
+        if(type==='firstname'){
             this.state.user.firstName = e;
             let nuser = this.state.user
             this.setState({user: nuser})
         }
-        if(type=='lastname'){
+        if(type==='lastname'){
             this.state.user.lastName = e;
             let nuser = this.state.user
             this.setState({user: nuser})
         }
-        if(type=='email'){
+        if(type==='email'){
             this.state.user.email = e;
             let nuser = this.state.user
             this.setState({user: nuser})
         }
-        if(type=='phone'){
+        if(type==='phone'){
             this.state.user.phone = e;
             let nuser = this.state.user
             this.setState({user: nuser})
         }
-        if(type=='city'){
+        if(type==='city'){
             this.state.user.city = e;
             let nuser = this.state.user
             this.setState({user: nuser})
         }
-        if(type=='dob'){
+        if(type==='dob'){
             this.state.user.dob = e;
             let nuser = this.state.user
             this.setState({user: nuser})
@@ -95,21 +92,13 @@ export default class UserProfile extends Component{
 
     }
 
-
-
     render(){
         return(
             <div>
-                <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <Link to="/" className="navbar-brand" >
-                        <i className="fa fa-video-camera pr-1 text-warning">
-                        </i>
-                        PickFlick
-                        Hey {this.state.user.firstName}!
-                    </Link>
-                </nav>
+                <UserHomeNavbar/>
                 <div className="container">
-                    <h1>Profile</h1>
+                    <h1>Hey {this.state.user.firstName}!</h1>
+                    <h5>My Profile</h5>
                     <form>
                         <div className="form-group row">
                             <label htmlFor="username"
