@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import UserServiceClient from "../services/user.service.client"
+import UserHomeNavbar from "../components/UserHomeNavbar";
 export default class UserProfile extends Component{
 
     constructor(props) {
@@ -19,7 +20,6 @@ export default class UserProfile extends Component{
                 type:'Fan'
             }
         }
-
     }
     componentDidMount(){
        UserServiceClient.getProfile().then(user=> this.setUser(user))
@@ -29,9 +29,6 @@ export default class UserProfile extends Component{
     setUser(user){
         this.setState({user:user})
     }
-
-
-
 
     updatefields(type,e){
         if(type=='username'){
@@ -95,21 +92,13 @@ export default class UserProfile extends Component{
 
     }
 
-
-
     render(){
         return(
             <div>
-                <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <Link to="/" className="navbar-brand" >
-                        <i className="fa fa-video-camera pr-1 text-warning">
-                        </i>
-                        PickFlick
-                        Hey {this.state.user.firstName}!
-                    </Link>
-                </nav>
+                <UserHomeNavbar/>
                 <div className="container">
-                    <h1>Profile</h1>
+                    <h1>Hey {this.state.user.firstName}!</h1>
+                    <h5>My Profile</h5>
                     <form>
                         <div className="form-group row">
                             <label htmlFor="username"
