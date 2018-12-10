@@ -1,7 +1,6 @@
-
 import React from 'react'
-import Movie from "./Movie";
 import MovieService from "../services/MovieService";
+import {MovieCard} from "./MovieCard";
 
 class Search extends React.Component {
 
@@ -23,15 +22,7 @@ class Search extends React.Component {
             .getMovies(ApiUrl)
             .then((searchResults) => {
                 let result = searchResults.results;
-                let movies = [];
-                if (result) {
-                    result.map((movie) => {
-                        movie.poster_src = "https://image.tmdb.org/t/p/w185" + movie.poster_path;
-                        let movieItem = <Movie key={movie.id} movie={movie}/>;
-                        movies.push(movieItem);
-                    });
-                    this.setState({movies: movies});
-                }
+                this.setState({movies: result});
             })
     }
 
@@ -44,15 +35,25 @@ class Search extends React.Component {
     render() {
         return (
             <div>
-                    <input className="form-control mr-sm-2"
-                           id="search-movies"
-                           type="search" onChange={this.searchMovies} placeholder="Search" aria-label="Search"/>
-                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                <div className="row course-deck">
-                    {
-                        this.state.movies.map((course,index) =>
-                            ( <div className="col-lg-2 col-md-4 col-sm-12">{course}</div>))
-                    }
+                <input className="form-control mr-sm-2"
+                       id="search-movies"
+                       type="search" onChange={this.searchMovies} placeholder="Search" aria-label="Search"/>
+                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+
+                <div className='row m-2'>
+                    <div className='col-9'>
+                        <div className="card-deck">
+                            {this.state.movies.map((movie, index) => {
+                                return (
+                                    <MovieCard key={index} image={movie.poster_path} movie={movie}/>
+                                )
+                            })}
+                        </div>
+                        <div className='col-3'>
+                            {/*<NowPlayingList nowPlayingMovies={this.props.nowPlayingMovies}/>*/}
+                            Now playing
+                        </div>
+                    </div>
                 </div>
             </div>
         )

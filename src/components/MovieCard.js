@@ -1,21 +1,20 @@
-import MovieService from "../services/MovieService";
 import React from 'react';
-import {BrowserRouter as Router, Link} from 'react-router-dom';
-export default class CourseCard extends React.Component
-{
-    constructor(props) {
-        super(props);
-        this.state = {};
+import {Link} from 'react-router-dom';
 
-    }
+export const MovieCard = ({movie, image}) => {
+    let poster_url = "https://image.tmdb.org/t/p/w500"+image;
+    return (
 
-    render() { return (
-    <div className="card" styles={{width: '18rem'}}>
-        <img className="card-img-top"
-             src={this.props.src}/>
-        <div className="card-body">
-            <h5 className="card-title">{this.props.cardtitle}</h5>
-            <p className="card-text">{this.props.cardtext}</p>
-            <Link to={`/details/${this.props.movieID}`}>More...</Link>
-            {/*<a href={this.props.url} className="btn btn-primary">More...</a>*/}
-        </div></div>)}}
+        <div className='col-lg-3 col-md-4 col-sm-6'>
+            <div className='card h-100'>
+                <img className="card-img-top" src={poster_url} alt="Card image cap"/>
+                <div className="card-body">
+                    <h5 className="card-title">{movie.title}</h5>
+                </div>
+                <div className="card-footer text-muted">
+                    <Link className='btn btn-outline-info' to={`/details/${movie.id}`}>View</Link>
+                </div>
+            </div>
+        </div>
+    )
+};
