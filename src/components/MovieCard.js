@@ -1,5 +1,6 @@
 import MovieService from "../services/MovieService";
-import React from 'react'
+import React from 'react';
+import {BrowserRouter as Router, Link} from 'react-router-dom';
 export default class CourseCard extends React.Component
 {
     constructor(props) {
@@ -15,5 +16,6 @@ export default class CourseCard extends React.Component
         <div className="card-body">
             <h5 className="card-title">{this.props.cardtitle}</h5>
             <p className="card-text">{this.props.cardtext}</p>
-            <a href={this.props.url} className="btn btn-primary">More...</a>
+            <Link to={`/details/${this.props.movieID}`}>More...</Link>
+            {/*<a href={this.props.url} className="btn btn-primary">More...</a>*/}
         </div></div>)}}

@@ -1,0 +1,39 @@
+.img-content img{
+    display: block;
+    width: 300px;
+    height: 450px;
+    box-shadow: 0 0 4px rgba(0,0,0,0.2);
+    border-radius: 4px;
+}
+
+.card-image {
+    width: 220px;
+    height: 220px;
+}
+
+.movie-title {
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+.headers {
+    font-weight: bold;
+    font-size: large;
+}
+
+.center {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.genre-button {
+    white-space: normal;
+}
+.div-background {
+    fontFamily: sans-serif;
+    width: 100%;
+    height: 100%;
+    background-color: #f7f7f7;
+    background-size: cover;
+}
