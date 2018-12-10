@@ -28,7 +28,7 @@ export default class CriticReview extends React.Component {
     render() {
         let text;
         let title;
-        if (this.props.reviews) {
+        if (this.state.reviews) {
             return (
                 <div>
                     <div hidden={this.props.type !== 'Critic' || !this.props.loggedIn}>
