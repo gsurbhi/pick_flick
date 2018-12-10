@@ -43,5 +43,11 @@ class MovieApiClient {
         }).then(response => response.json())
     }
 
+    static findNowPlayingMovies(){
+        return fetch (MAPI_URL+'/get-now-playing',{
+            credentials:'include'
+        }).then(response => response.json())
+    }
+
 }
 export default MovieApiClient;

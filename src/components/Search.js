@@ -1,12 +1,14 @@
 import React from 'react'
 import MovieService from "../services/MovieService";
 import {MovieCard} from "./MovieCard";
-
+import NowPlayingList from "../containers/NowPlayingList";
+import MovieApiService from "../services/mapi.service.client"
 class Search extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {movies:[]};
+        this.state = {movies:[],
+        nowPlaying : []};
         this.movieService = MovieService.instance;
         this.searchMovies = this.searchMovies.bind(this);
     }
@@ -14,6 +16,8 @@ class Search extends React.Component {
 
     componentDidMount() {
         this.getMovieList("social");
+        this.nowPlayingList();
+
     }
 
     getMovieList(searchTerm) {
@@ -26,10 +30,19 @@ class Search extends React.Component {
             })
     }
 
+    nowPlayingList(){
+        MovieApiService.findNowPlayingMovies()
+            .then((result) => {
+                this.setState({nowPlaying: result.results})
+            });
+    }
+
     searchMovies(event) {
         let query = event.target.value;
         this.getMovieList(query);
     }
+
+
 
 
     render() {
@@ -49,11 +62,11 @@ class Search extends React.Component {
                                 )
                             })}
                         </div>
-                        <div className='col-3'>
-                            {/*<NowPlayingList nowPlayingMovies={this.props.nowPlayingMovies}/>*/}
-                            Now playing
-                        </div>
                     </div>
+                        <div className='col-3'>
+                            <NowPlayingList nowPlayingMovies={this.state.nowPlaying}/>
+                        </div>
+
                 </div>
             </div>
         )
