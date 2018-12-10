@@ -3,7 +3,7 @@ import UserHomeNavbar from "../components/UserHomeNavbar";
 import UserServiceClient from "../services/user.service.client";
 import {Link} from "react-router-dom";
 import '../styles/fan.explore.container.client.css';
-import AdminServiceClient from "../services/admin.service.client";
+import FanServiceClient from "../services/fan.service.client";
 
 export default class FanExploreContainer extends Component {
 
@@ -15,6 +15,8 @@ export default class FanExploreContainer extends Component {
         }
         this.setUser = this.setUser.bind(this)
         this.setUserList = this.setUserList.bind(this)
+        this.followUser = this.followUser.bind(this)
+        this.unfollowUser = this.unfollowUser.bind(this)
     }
     componentDidMount() {
         UserServiceClient.getProfile().then(user => {
@@ -43,6 +45,16 @@ export default class FanExploreContainer extends Component {
         })
     }
 
+    followUser(user){
+        FanServiceClient.followFan(user._id).then(response => console.log(response.status))
+        alert("followed user" + user.firstName)
+    }
+
+    unfollowUser(user){
+        FanServiceClient.unfollowFan(user).then(response => console.log(response.status))
+        alert("unfollowed user" + user.firstName)
+    }
+
 
     render(){
         return (
@@ -60,9 +72,16 @@ export default class FanExploreContainer extends Component {
                                         <h5 className="card-title">{user.firstName} {user.lastName}</h5>
                                         <p className="card-text">
                                             <Link to={`/public/profile/${user._id}`}>
-                                                Reviews
+                                                Profile
                                             </Link>
-                                            <i className="btn m-1 fa fa-plus"></i>
+                                            <button className="btn btn-outline-success"
+                                                    onClick={()=> this.followUser(user)}>
+                                                Follow
+                                            </button>
+                                            <button className="btn btn-outline-danger"
+                                                    onClick={()=> this.unfollowUser(user)}>
+                                                Unfollow
+                                            </button>
                                         </p>
                                     </div>
                                 </div>

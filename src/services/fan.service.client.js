@@ -1,4 +1,4 @@
-let FAN_URL = 'https://desolate-retreat-56126.herokuapp.com/api/movie';
+let FAN_URL = 'http://desolate-retreat-56126.herokuapp.com/api/';
 
 class FanServiceClient {
 

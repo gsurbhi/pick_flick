@@ -14,6 +14,7 @@ import CriticReview from "./components/CriticReview";
 import ReviewsByCritic from "./components/ReviewsByCritic";
 import ExploreMoviesContainer from "./containers/ExploreMoviesContainer";
 import FanExploreContainer from "./containers/FanExploreContainer";
+import UserPublicProfile from "./components/UserPublicProfile";
 
 export default class App extends React.Component{
 
@@ -46,6 +47,7 @@ export default class App extends React.Component{
                                component={DetailsPage}/>
                         <Route exact path='/explore' component={ExploreMoviesContainer}/>
                         <Route path="/fan/explore" component={FanExploreContainer} />
+                        <Route path="/public/profile/:userId" component={UserPublicProfile}/>
                     </div>
                 </Router>
             </div>
