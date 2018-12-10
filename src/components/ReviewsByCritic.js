@@ -101,7 +101,7 @@ export default class ReviewsByCritic extends React.Component {
 
 
                 <ul className="list-group m-5">
-                    <Link to={"/critic/"+this.state.user._id+"/home"}>
+                    <Link to={"/critic/"+this.state.user._id+"/critic-home"}>
                         ....Back
                     </Link>
                     {

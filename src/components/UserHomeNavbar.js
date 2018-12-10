@@ -56,7 +56,7 @@ export default class UserHomeNavbar extends Component {
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                     {
                         this.state.userType === 'Critic' &&
-                        <Link to={"/critic/"+this.state.userId+"/home"} className="navbar-brand" >
+                        <Link to={"/critic/"+this.state.userId+"/critic-home"} className="navbar-brand" >
                             <i className="fa fa-video-camera pr-1 text-warning"></i>
                             PickFlick
                         </Link>

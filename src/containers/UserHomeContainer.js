@@ -47,7 +47,7 @@ export default class UserHomeContainer extends Component{
     componentDidMount(){
         UserServiceClient.getProfile().then(user => {
             if(user.type === 'Critic'){
-                window.location.href='/critic/' + user._id + '/home'
+                window.location.href='/critic/' + user._id + '/critic-home'
             }
 
         });

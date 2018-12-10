@@ -31,7 +31,7 @@ export default class App extends React.Component{
                                component={LoginComponent} />
                         <Route path="/:userid/home"
                                component={UserHomeContainer} />
-                        <Route path="/critic/:userid/home"
+                        <Route path="/critic/:userid/critic-home"
                                component={CriticHomeContainer} />
                         <Route path="/profile/:userid"
                                component={UserProfile} />
