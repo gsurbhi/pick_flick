@@ -8,6 +8,7 @@ import CriticHomeContainer from "./containers/CriticHomeContainer";
 import RegisterUserContainer from "./containers/RegisterUserContainer";
 import AdminContainer from "./containers/AdminContainer";
 import SearchResultsPage from "./components/SearchResultsPage";
+import CriticReviewContainer from "./containers/CriticReviewContainer";
 
 export default class App extends React.Component{
 
@@ -32,6 +33,8 @@ export default class App extends React.Component{
                                component={AdminContainer}/>
                         <Route path="/search/:term"
                                component={SearchResultsPage}/>
+                        <Route path="/movie/:movieid/review"
+                               component={CriticReviewContainer}/>
                     </div>
                 </Router>
             </div>

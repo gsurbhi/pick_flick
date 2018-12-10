@@ -11,9 +11,11 @@ const CriticHomeMovieCards = ({movie,addMovieToUserWatchList}) =>
                     <button className="btn btn-outline-success btn-sm mr-1">
                         <i className="fa fa-thumbs-up"></i>
                     </button>
+                    <Link to={"/movie/"+movie.id+"/review"}>
                     <button className="btn btn-outline-warning btn-sm mr-1">
                         <i className="fa fa-pencil"></i>
                     </button>
+                    </Link>
                     <button className="btn btn-outline-warning btn-sm mr-1"
                             onClick={() => {addMovieToUserWatchList(movie)}}>
                         <i className="fa fa-plus"></i>
