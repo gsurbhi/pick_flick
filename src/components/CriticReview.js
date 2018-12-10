@@ -24,19 +24,29 @@ export default class CriticReview extends React.Component {
     setDetails(reviews) {
         this.setState(
             {
-                reviews: reviews
+                reviews: reviews,
+                loggedIn: false,
+                userType: ''
             })
     }
 
     createReview(reviewTitle, reviewText, movieTitle, movieId){
+        let review ={
+            title: reviewTitle,
+            text: reviewText,
+            movieName: movieTitle,
+            movieId: movieId
+        };
 
-        console.log(reviewText)
-        UserServiceClient.isloggedIn().then(response => console.log(response.status))
-        /*title: title.value,
-        text: text.value,
-        movieName: this.props.movie.original_title,
-        movieId: this.props.movieId*/
+        CriticServiceClient.createCriticReview(review).then((review) => console.log(review) );
+        // UserServiceClient.isloggedIn().then(response => console.log(response.status))
     }
+
+    loggedIn(){
+        UserServiceClient.isloggedIn().then(response => (response.status));
+    }
+
+
     render() {
         let text;
         let title;
@@ -51,7 +61,7 @@ export default class CriticReview extends React.Component {
                         })}
                     </div>
 
-                    <div>
+                    <div hidden={this.state.userType !== 'Critic' || !this.state.loggedIn}>
                         <label htmlFor="reviewTitle">Review Title</label>
                         <input className="form-control"
                                ref={node => title = node}
