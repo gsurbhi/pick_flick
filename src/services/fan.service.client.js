@@ -44,17 +44,6 @@ class FanServiceClient {
 
     }
 
-    static getActorContent(id) {
-        return fetch(FAN_URL + 'actor/events/' + id, {
-            method: 'get',
-            credentials: "include",
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-
-    }
-
     static getFollowedFansForUser() {
         return fetch(FAN_URL + 'fan/following', {
             method: 'get',
