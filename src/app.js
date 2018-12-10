@@ -13,6 +13,7 @@ import DetailsPage from "./components/DetailsPage";
 import CriticReview from "./components/CriticReview";
 import ReviewsByCritic from "./components/ReviewsByCritic";
 import ExploreMoviesContainer from "./containers/ExploreMoviesContainer";
+import FanExploreContainer from "./containers/FanExploreContainer";
 
 export default class App extends React.Component{
 
@@ -44,6 +45,7 @@ export default class App extends React.Component{
                         <Route path="/details/:movieId"
                                component={DetailsPage}/>
                         <Route exact path='/explore' component={ExploreMoviesContainer}/>
+                        <Route path="/fan/explore" component={FanExploreContainer} />
                     </div>
                 </Router>
             </div>

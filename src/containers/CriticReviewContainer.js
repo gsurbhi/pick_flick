@@ -69,7 +69,7 @@ export default class CriticReviewContainer extends React.Component {
             }
             else {
                 alert("Your review is saved!")
-                window.location.href='/critic/' + this.state.user.userId + '/home'
+                window.location.href='/critic/' + this.state.user._id + '/home'
             }
         })
 
