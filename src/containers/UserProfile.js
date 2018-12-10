@@ -146,7 +146,6 @@ export default class UserProfile extends Component{
                                         value={this.state.user.password}/>
                                     <option value="fan">Fan</option>
                                     <option value="critic">Critic</option>
-                                    <option value="Actor">Actor</option>
                                 </select>
 
                             </div>

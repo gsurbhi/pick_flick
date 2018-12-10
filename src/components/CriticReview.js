@@ -8,7 +8,9 @@ export default class CriticReview extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            reviews:''
+            reviews:'',
+            loggedIn: false,
+            userType: ''
         };
         this.createReview = this.createReview.bind(this)
 
@@ -24,9 +26,7 @@ export default class CriticReview extends React.Component {
     setDetails(reviews) {
         this.setState(
             {
-                reviews: reviews,
-                loggedIn: false,
-                userType: ''
+                reviews: reviews
             })
     }
 
