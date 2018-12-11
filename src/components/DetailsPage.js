@@ -31,6 +31,7 @@ class DetailsPage extends React.Component {
         })
 
     }
+
     componentWillMount() {
         MoveiApiServiceClient.findMovieDetails(this.props.match.params.movieId)
             .then((details) => {

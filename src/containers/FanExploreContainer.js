@@ -15,18 +15,28 @@ export default class FanExploreContainer extends Component {
         }
         this.setUser = this.setUser.bind(this)
         this.setUserList = this.setUserList.bind(this)
+        this.setLoginToggle = this.setLoginToggle.bind(this)
         this.followUser = this.followUser.bind(this)
         this.unfollowUser = this.unfollowUser.bind(this)
     }
+
+    setLoginToggle(flag){
+        this.setState({
+            loggedIn: flag
+        })
+
+    }
+
     componentDidMount() {
 
         UserServiceClient.isloggedIn().then(response => {
             if(response.status === 200){
+                this.setLoginToggle(true)
                 UserServiceClient.getProfile().then(user => this.setUser(user))
             }
-            /* else{
-                 alert("not logged in")
-             }*/
+            else{
+                this.setLoginToggle(false)
+            }
         })
 
         /* old code, before explore was made available to ALL
@@ -66,7 +76,34 @@ export default class FanExploreContainer extends Component {
     render(){
         return (
             <div>
-                <UserHomeNavbar/>
+                <div hidden={!this.state.loggedIn}>
+                    <UserHomeNavbar/>
+                </div>
+                <div hidden={this.state.loggedIn}>
+                    <nav className="navbar navbar-light bg-light">
+
+                        <Link to="/" className="navbar-brand">
+                            <i className="fa fa-video-camera pr-1 text-warning"></i>
+                            PickFlick
+                        </Link>
+                        <ul className="nav mr-auto">
+                            <li className="nav-item">
+                                <Link to="/login" className="nav-link text-dark">
+                                    Login
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/register" className="nav-link text-dark">
+                                    Sign up!
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/fan/explore" className="nav-link">Explore</Link>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
                 <div className="mt-2 container">
                     <div className="row">
                     {
@@ -81,6 +118,7 @@ export default class FanExploreContainer extends Component {
                                             <Link to={`/public/profile/${user._id}`}>
                                                 Profile
                                             </Link>
+                                            <div hidden={!this.state.loggedIn}>
                                             <button className="btn btn-outline-success"
                                                     onClick={()=> this.followUser(user)}>
                                                 Follow
@@ -89,6 +127,7 @@ export default class FanExploreContainer extends Component {
                                                     onClick={()=> this.unfollowUser(user)}>
                                                 Unfollow
                                             </button>
+                                            </div>
                                         </p>
                                     </div>
                                 </div>
