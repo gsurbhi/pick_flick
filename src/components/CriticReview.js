@@ -17,7 +17,6 @@ export default class CriticReview extends React.Component {
     }
 
     componentWillMount(){
-        UserServiceClient.isloggedIn()
         CriticServiceClient.findAllCriticReviewsForMovie(this.props.movieId).then((reviews) => {
             this.setDetails(reviews)
         });
@@ -54,10 +53,11 @@ export default class CriticReview extends React.Component {
         })
     }
 
-
+/*
     loggedIn(){
         UserServiceClient.isloggedIn().then(response => (response.status));
     }
+*/
 
 
     render() {
@@ -80,7 +80,9 @@ export default class CriticReview extends React.Component {
                                ref={node => title = node}
                                id="reviewTitle"
                                placeholder="Review Title"/>
-                        <label htmlFor="review-text">Write Review</label>
+                        <label htmlFor="review-text">
+                            Write Review
+                        </label>
                         <textarea ref={node => text = node}
                                   className="form-control"
                                   placeholder="Write review"
