@@ -89,6 +89,13 @@ export default class UserHomeNavbar extends Component {
                                     Series
                                     <span className="sr-only">(current)</span></Link>
                             </li>*/}
+                            {
+                                this.state.userType === 'Admin' &&
+                                <li>
+                                    <Link to={"/admin/"+this.state.userId} className="nav-link">Admin Console</Link>
+                                </li>
+                            }
+
                             <li className="nav-item">
                                 <Link to="/fan/explore" className="nav-link">Explore</Link>
                             </li>

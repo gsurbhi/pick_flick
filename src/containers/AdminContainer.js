@@ -10,16 +10,20 @@ export default class AdminContainer extends React.Component {
         super(props);
         this.state = {
             userId: '',
-            users: []
+            users: [],
+            editingFlag:false,
+            newUsername:''
         };
 
         this.renderUsers = this.renderUsers.bind(this);
         this.deleteUser = this.deleteUser.bind(this);
         this.setUsers = this.setUsers.bind(this);
+        this.toggleToEditMode = this.toggleToEditMode.bind(this);
+        this.updateUser = this.updateUser.bind(this);
+        this.usernameEdit = this.usernameEdit.bind(this);
     }
 
     setUsers(users){
-        console.log(users)
         this.setState({users:users})
     }
 
@@ -58,59 +62,6 @@ export default class AdminContainer extends React.Component {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr className="table-dark p-3">
-                        <td>
-                            <input placeholder='Username'
-                                   className="w-100 form-control"
-                                   onChange={(event) => this.username = event.target.value}/>
-                        </td>
-                        <td>
-                            <input placeholder='Password'
-                                   className="w-100 form-control"
-                                   onChange={(event) => this.password = event.target.value}/>
-                        </td>
-                        <td>
-                            <input placeholder='FirstName'
-                                   className="w-100 form-control"
-                                   onChange={(event) => this.firstName = event.target.value}/>
-                        </td>
-                        <td>
-                            <input placeholder='LastName'
-                                   className="w-100 form-control"
-                                   onChange={(event) => this.lastName = event.target.value}/>
-                        </td>
-                        <td>
-                            <select value={this.type}
-                                    onChange={(event) => this.type = event.target.value}>
-                                <option value="Fan">Fan</option>
-                                <option value="Actor">Actor</option>
-                                <option value="Critic">Critic</option>
-                                <option value="Admin">Admin</option>
-                            </select>
-                        </td>
-                        <td>
-                            <input placeholder='Email'
-                                   className="w-100 form-control"
-                                   onChange={(event) => this.email = event.target.value}/>
-                        </td>
-                        <td>
-                            <input placeholder='City'
-                                   className="w-100 form-control"
-                                   onChange={(event) => this.city = event.target.value}/>
-                        </td>
-                        <td>
-                            <input placeholder='Phone'
-                                   className="w-100 form-control"
-                                   onChange={(event) => this.phone = event.target.value}/>
-                        </td>
-                        <td>
-                            <button type='btn'
-                                    className="btn btn-success btn-block"
-                                    onClick={() => this.updateUser()}>
-                                Create
-                            </button>
-                        </td>
-                    </tr>
                     {this.renderUsers()}
                     </tbody>
                 </table>
@@ -118,12 +69,39 @@ export default class AdminContainer extends React.Component {
         )
     }
 
+    toggleToEditMode(username){
+        this.setState({
+            editingFlag:true,
+            newUsername: username
+        });
+    }
+
     renderUsers() {
+
         if (this.state.users) {
             return this.state.users.map(user => {
+                let input;
                     return (
                         <tr>
-                            <td>{user.username}</td>
+                            <td>
+                                <div style={{display:this.state.editingFlag?'none':'block'}}>
+                                    {user.username}
+                                    <button className="m-1 btn btn-sm rounded-circle btn-outline-info"
+                                            onClick={()=> this.toggleToEditMode(user.username)}>
+                                        <i className="fa fa-pencil"></i>
+                                    </button>
+                                </div>
+                                <div style={{display:this.state.editingFlag?'block':'none'}}>
+                                    <input className="form-control"
+                                           value={this.state.newUsername}
+                                           onChange={e => this.usernameEdit(e.target.value)}
+                                           ref={node => {input = node;}}/>
+                                    <button className="m-1 btn btn-sm rounded-circle btn-outline-success"
+                                            onClick={() => this.updateUser(user)}>
+                                        <i className="fa fa-check"></i>
+                                    </button>
+                                </div>
+                                </td>
                             <td>{}</td>
                             <td>{user.firstName}</td>
                             <td>{user.lastName}</td>
@@ -132,13 +110,9 @@ export default class AdminContainer extends React.Component {
                             <td>{user.city}</td>
                             <td>{user.phone}</td>
                             <td>
+
                                 <button type='btn'
-                                        className="btn btn-outline-info w-100"
-                                        onClick={() => this.selectUser(user)}>
-                                    <i className="fa fa-pencil"></i>
-                                </button>
-                                <button type='btn'
-                                        className="btn btn-danger w-100 my-1"
+                                        className="btn btn-danger"
                                         onClick={() => this.deleteUser(user._id)}>
                                     <i className="fa fa-trash"></i>
                                 </button>
@@ -170,20 +144,17 @@ export default class AdminContainer extends React.Component {
         this.password = '';
     }
 
-    updateUser(id) {
-        let user = {
-            _id: id,
-            username: this.username,
-            firstName: this.firstName,
-            lastName: this.lastName,
-            type: this.type,
-            email: this.email,
-            city: this.city,
-            phone: this.phone,
-            password: this.password
-        };
+    updateUser(user) {
+        user.username = this.state.newUsername;
         AdminServiceClient.updateUser(user);
-        this.selectUser('');
+        setTimeout(() => {AdminServiceClient.getUsers().then(users1 =>  this.setState({users:users1}))}, 500)
+    }
+
+    usernameEdit(txt){
+        console.log(txt)
+        this.setState({
+            newUsername: txt
+        });
     }
 
     selectUser(user) {

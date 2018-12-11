@@ -37,7 +37,7 @@ export default class App extends React.Component{
                                component={CriticHomeContainer} />
                         <Route path="/profile/:userid"
                                component={UserProfile} />
-                       <Route path="/admin"
+                       <Route path="/admin/:userId"
                                component={AdminContainer}/>
                         <Route path="/search/:term"
                                component={SearchResultsPage}/>
