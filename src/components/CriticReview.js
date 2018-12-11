@@ -75,25 +75,44 @@ export default class CriticReview extends React.Component {
                     </div>
 
                     <div>
-                        <label htmlFor="reviewTitle">Review Title</label>
-                        <input className="form-control"
-                               ref={node => title = node}
-                               id="reviewTitle"
-                               placeholder="Review Title"/>
-                        <label htmlFor="review-text">
-                            Write Review
-                        </label>
-                        <textarea ref={node => text = node}
-                                  className="form-control"
-                                  placeholder="Write review"
-                                  id="review-text">
-                        </textarea>
-                        <button className="btn btn-primary btn-block"
-                                onClick={() => {
-                            this.createReview(title.value, text.value, this.props.original_title,this.props.movieId)
-                            }}>
-                                Submit
-                        </button>
+
+                        <div className= "form-group row">
+                            <label className= "col-sm-6 col-form-label">
+                                Review Title
+                            </label>
+                            <div className= "col-sm-12">
+                                <input className="form-control"
+                                       ref={node => title = node}
+                                       id="reviewTitle"
+                                       placeholder="Review Title"/>
+                            </div>
+                        </div>
+
+                        <div className= "form-group row">
+                            <label className= "col-sm-6 col-form-label">
+                                Write Review
+                            </label>
+                            <div className= "col-sm-12">
+                                <textarea ref={node => text = node}
+                                          className="form-control"
+                                          placeholder="Write review"
+                                          id="review-text">
+                                </textarea>
+                            </div>
+                        </div>
+
+                        <div className= "form-group row">
+                            <label className= "col-sm-6 col-form-label">
+                            </label>
+                            <div className= "col-sm-12">
+                            <button className="btn btn-primary btn-block"
+                                    onClick={() => {
+                                this.createReview(title.value, text.value, this.props.original_title,this.props.movieId)
+                                }}>
+                                    Submit
+                            </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )

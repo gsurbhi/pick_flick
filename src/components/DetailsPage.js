@@ -58,15 +58,13 @@ class DetailsPage extends React.Component {
     render() {
         return (
             <div>
-
-
                 <div hidden={this.state.loggedIn}>
                     <nav className="navbar navbar-light bg-light">
-                        <a className="navbar-brand">
+                        {/*<a className="navbar-brand">*/}
                             <Link to="/" className="fa fa-video-camera pr-1 text-warning">
                                 PickFlick
                             </Link>
-                        </a>
+                            {/*</a>*/}
                         <ul className="nav mr-auto">
                             <li className="nav-item">
                                 <Link to="/login" className="nav-link text-dark">
