@@ -82,7 +82,6 @@ export default class UserHomeContainer extends Component{
     }
 
     favoriteMovie(movie){
-        console.log(movie)
         MovieServiceClient.favouriteMovies(movie).then(response=>
         {
             if (response.status !== 200) {

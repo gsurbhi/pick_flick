@@ -33,7 +33,7 @@ export default class UserHomeNavbar extends Component {
                 UserServiceClient.getProfile().then(user => this.setUserId(user._id,user.type))
             }
            /* else{
-                console.log("not loged in")
+                alert("not logged in")
             }*/
         })
 
@@ -85,17 +85,13 @@ export default class UserHomeNavbar extends Component {
 
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
+                            {/*<li className="nav-item">
+                                <Link to="/" className="nav-link">
+                                    Series
+                                    <span className="sr-only">(current)</span></Link>
+                            </li>*/}
                             <li className="nav-item">
-                                <Link to="/" className="nav-link">Series <span className="sr-only">(current)</span></Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to="/" className="nav-link">Movies</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to="/" className="nav-link">Favorites</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to="/" className="nav-link">Explore</Link>
+                                <Link to="/fan/explore" className="nav-link">Explore</Link>
                             </li>
                             {
                                 this.state.userType === 'Critic' &&

@@ -1,6 +1,6 @@
 import UserServiceClient from "../services/user.service.client";
 import {Link} from "react-router-dom";
-import React from "react";
+import React, {Component} from "react";
 import UserService from '../services/user.service.client'
 
 export default class UserHomeNavbar extends Component {

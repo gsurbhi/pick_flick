@@ -15,6 +15,7 @@ import ReviewsByCritic from "./components/ReviewsByCritic";
 import ExploreMoviesContainer from "./containers/ExploreMoviesContainer";
 import FanExploreContainer from "./containers/FanExploreContainer";
 import UserPublicProfile from "./components/UserPublicProfile";
+import Favorites from "./components/Favorites";
 
 export default class App extends React.Component{
 
@@ -35,8 +36,8 @@ export default class App extends React.Component{
                                component={CriticHomeContainer} />
                         <Route path="/profile/:userid"
                                component={UserProfile} />
-                        <Route path="/favourite/:userid"
-                            component={Favourites} />
+                        <Route path="/favorites/:userid"
+                            component={Favorites} />
                        <Route path="/admin"
                                component={AdminContainer}/>
                         <Route path="/search/:term"

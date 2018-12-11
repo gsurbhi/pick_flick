@@ -116,7 +116,7 @@ export default class CriticReviewContainer extends React.Component {
                                 </textarea>
                             </div>
 
-                            <Link to={"/critic/"+this.state.user._id+"/home"}>
+                            <Link to={"/critic/"+this.state.user._id+"/critic-home"}>
                                 <button className="btn btn-danger"> Cancel </button>
                             </Link>
                             <button className="btn float-right btn-success"
