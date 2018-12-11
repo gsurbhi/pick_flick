@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import UserServiceClient from "../services/user.service.client"
 import UserHomeNavbar from "../components/UserHomeNavbar";
+import ProfileLinksComponent from "../components/ProfileLinksComponent"
 export default class UserProfile extends Component{
 
     constructor(props) {
@@ -96,8 +97,10 @@ export default class UserProfile extends Component{
             <div>
                 <UserHomeNavbar/>
                 <div className="container">
+                    <div className="row">
                     <h1>Hey {this.state.user.firstName}!</h1>
                     <h5>My Profile</h5>
+                        <div className="row col-sm">
                     <form>
                         <div className="form-group row">
                             <label htmlFor="username"
@@ -268,8 +271,14 @@ export default class UserProfile extends Component{
                             </button>
                         </div>
                     </div>
+                        </div>
+                        <div className="row col-sm">
+                            <ProfileLinksComponent
+                                userId ={this.state.user._id}
+                            />
+                        </div>
                 </div>
-            </div>
+                </div></div>
         )
     }
 
