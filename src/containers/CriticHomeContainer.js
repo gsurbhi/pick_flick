@@ -84,6 +84,7 @@ export default class LoginHomeContainer extends Component{
                 alert("Internal Server Error, Try Again")
             }
             else {
+                console.log("fetching latest favorites")
                 MovieServiceClient.getFavouriteMovies().then(movies => this.setFavoriteMovies(movies.favourites))
             }
         })

@@ -12,7 +12,8 @@ export default class AdminContainer extends React.Component {
             userId: '',
             users: [],
             editingFlag:false,
-            newUsername:''
+            newUsername:'',
+            newUser:[]
         };
 
         this.renderUsers = this.renderUsers.bind(this);
@@ -21,6 +22,7 @@ export default class AdminContainer extends React.Component {
         this.toggleToEditMode = this.toggleToEditMode.bind(this);
         this.updateUser = this.updateUser.bind(this);
         this.usernameEdit = this.usernameEdit.bind(this);
+        this.createUser = this.createUser.bind(this)
     }
 
     setUsers(users){
@@ -46,7 +48,7 @@ export default class AdminContainer extends React.Component {
         return (
             <div>
                 <UserHomeNavbar/>
-                <table className="table w-100">
+                <table className="table">
 
                     <thead className='thead-dark'>
                     <tr>
@@ -62,11 +64,81 @@ export default class AdminContainer extends React.Component {
                     </tr>
                     </thead>
                     <tbody>
+                    <tr>
+                        <td>
+                            <input placeholder='Username'
+                                   className="form-control"
+                                   onChange={(event) => this.username = event.target.value}/>
+                        </td>
+                        <td>
+                            <input placeholder='Password'
+                                   className="form-control"
+                                   onChange={(event) => this.password = event.target.value}/>
+                        </td>
+                        <td>
+                            <input placeholder='FirstName'
+                                   className="form-control"
+                                   onChange={(event) => this.firstName = event.target.value}/>
+                        </td>
+                        <td>
+                            <input placeholder='LastName'
+                                   className="form-control"
+                                   onChange={(event) => this.lastName = event.target.value}/>
+                        </td>
+                        <td>
+                            <select onChange={(event) => {this.type = event.target.value}}
+                                    className="form-control">
+                                <option value="Fan">Fan</option>
+                                <option value="Critic">Critic</option>
+                                <option value="Admin">Admin</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input placeholder='Email'
+                                   className="form-control"
+                                   onChange={(event) => this.email = event.target.value}/>
+                        </td>
+                        <td>
+                            <input placeholder='City'
+                                   className="form-control"
+                                   onChange={(event) => this.city = event.target.value}/>
+                        </td>
+                        <td>
+                            <input placeholder='Phone'
+                                   className="form-control"
+                                   onChange={(event) => this.phone = event.target.value}/>
+                        </td>
+                        <td>
+                            <button type='btn'
+                                    className="btn btn-success"
+                                    onClick={() => this.createUser()}>
+                                Create
+                            </button>
+                        </td>
+                    </tr>
+
+
                     {this.renderUsers()}
                     </tbody>
                 </table>
             </div>
         )
+    }
+
+    createUser(){
+        let user ={
+            "username":this.username,
+            "firstName":this.firstName,
+            "lastName":this.lastName,
+            "type":this.type,
+            "email":this.email,
+            "city":this.city,
+            "phone":this.phone,
+            "password":this.password
+        }
+        console.log(user)
+        UserServiceClient.createUser(user)
+        setTimeout(() => {AdminServiceClient.getUsers().then(users1 =>  this.setState({users:users1}))}, 500)
     }
 
     toggleToEditMode(username){
