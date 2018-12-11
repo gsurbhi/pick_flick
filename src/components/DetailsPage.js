@@ -43,9 +43,9 @@ class DetailsPage extends React.Component {
             <div>
                 <nav className="navbar navbar-light bg-light">
                     <a className="navbar-brand">
-                        <i className="fa fa-video-camera pr-1 text-warning">
-                        </i>
-                        PickFlick
+                        <Link to="/" className="fa fa-video-camera pr-1 text-warning">
+                            PickFlick
+                        </Link>
                     </a>
                     <ul className="nav mr-auto">
                         <li className="nav-item">
