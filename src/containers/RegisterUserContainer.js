@@ -150,7 +150,6 @@ export default class RegisterUserContainer extends Component{
                                     value={this.state.user.type}/>
                                     <option value="fan">Fan</option>
                                     <option value="critic">Critic</option>
-                                    <option value="Actor">Actor</option>
                                 </select>
 
                             </div>
