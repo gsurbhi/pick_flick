@@ -95,7 +95,7 @@ export default class UserHomeNavbar extends Component {
                                 <Link to="/" className="nav-link">Favorites</Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/" className="nav-link">Explore</Link>
+                                <Link to="/fan/explore" className="nav-link">Explore</Link>
                             </li>
                             {
                                 this.state.userType === 'Critic' &&
