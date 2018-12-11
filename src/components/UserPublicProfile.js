@@ -55,10 +55,10 @@ export default class UserPublicProfile extends Component {
                             Username: {this.state.user.username}
                         </div>
                         <div>
-                            Followers: {this.state.user.followers}
+                            Followers: {this.state.user.followers && this.state.user.followers.length}
                         </div>
                         <div>
-                            Following: {this.state.user.following}
+                            Following: {this.state.user.following && this.state.user.following.length}
                         </div>
                     </li>
                 </ul>
