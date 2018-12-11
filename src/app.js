@@ -16,6 +16,7 @@ import ExploreMoviesContainer from "./containers/ExploreMoviesContainer";
 import FanExploreContainer from "./containers/FanExploreContainer";
 import UserPublicProfile from "./components/UserPublicProfile";
 import Favorites from "./components/Favorites";
+import WatchlistPage from "./components/WatchlistPage";
 
 export default class App extends React.Component{
 
@@ -36,8 +37,7 @@ export default class App extends React.Component{
                                component={CriticHomeContainer} />
                         <Route path="/profile/:userid"
                                component={UserProfile} />
-                        <Route path="/favorites/:userid"
-                            component={Favorites} />
+
                        <Route path="/admin"
                                component={AdminContainer}/>
                         <Route path="/search/:term"
@@ -48,9 +48,16 @@ export default class App extends React.Component{
                                component={ReviewsByCritic}/>
                         <Route path="/details/:movieId"
                                component={DetailsPage}/>
-                        <Route exact path='/explore' component={ExploreMoviesContainer}/>
-                        <Route path="/fan/explore" component={FanExploreContainer} />
-                        <Route path="/public/profile/:userId" component={UserPublicProfile}/>
+                        <Route exact path='/explore'
+                               component={ExploreMoviesContainer}/>
+                        <Route path="/fan/explore"
+                               component={FanExploreContainer} />
+                        <Route path="/public/profile/:userId"
+                               component={UserPublicProfile}/>
+                        <Route path="/favorites/:userid"
+                               component={Favorites} />
+                        <Route path="/watchlist/:userid"
+                               component={WatchlistPage} />
                     </div>
                 </Router>
             </div>

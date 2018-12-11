@@ -3,29 +3,29 @@ import React, {Component} from "react";
 import MovieServiceClient from "../services/movie.service.client";
 import UserHomeNavbar from "./UserHomeNavbar";
 
-export default class Favorites extends Component {
+export default class WatchlistPage extends Component {
     constructor(props){
         super(props);
         this.state = {
             user:'',
-            favoriteMovies:[]
+            watchList:[]
         };
         this.setUser = this.setUser.bind(this)
-        this.setFavoriteMovies = this.setFavoriteMovies.bind(this)
+        this.setWatchlistMovies = this.setWatchlistMovies.bind(this)
     }
 
     setUser(user){
         this.setState({user:user})
     }
 
-    setFavoriteMovies(movies){
+    setWatchlistMovies(movies){
         this.setState({
-            favoriteMovies:movies
+            watchList:movies
         })
     }
 
     componentWillMount(){
-        MovieServiceClient.getFavouriteMovies().then(movies => this.setFavoriteMovies(movies.favourites))
+        MovieServiceClient.getWatchlistMovies().then(movies => this.setWatchlistMovies(movies.watchList))
     }
 
     render(){
@@ -33,14 +33,14 @@ export default class Favorites extends Component {
             <div>
                 <UserHomeNavbar/>
                 <div className="container">
-                    <h1> My favorites</h1>
+                    <h1> My Watchlist</h1>
                     <ul className="list-group">
-                        {this.state.favoriteMovies && this.state.favoriteMovies.map(movie => {
+                        {this.state.watchList && this.state.watchList.map(movie => {
                             return <li className="list-group-item">
                                 <Link to={`/details/${movie.id}`}>
                                     {movie.title}
                                 </Link>
-                                </li>
+                            </li>
                         })}
                     </ul>
                 </div>

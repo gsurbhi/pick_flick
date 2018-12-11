@@ -3,14 +3,12 @@ import {Link} from "react-router-dom";
 import React, {Component} from "react";
 import UserService from '../services/user.service.client'
 
-export default class UserHomeNavbar extends Component {
+export default class ProfileLinksComponent extends Component {
     constructor(props){
         super(props);
         this.state = {
             user:''
         };
-        this.goToFav = this.goToFav.bind(this)
-        this.goToWatchList=this.goToWatchList.bind(this)
         this.goToFollowers=this.goToFollowers.bind(this)
         this.goToFollowing=this.goToFollowing.bind(this)
     }
@@ -24,13 +22,6 @@ export default class UserHomeNavbar extends Component {
         });
     }
 
-    goToFav(){
-         window.location.href='/favourites/' + this.state.user._id
-    }
-
-    goToWatchList(){
-        window.location.href='/watchlist/' + this.state.user._id
-    }
     goToFollowers(){
         window.location.href='/follower/' + this.state.user._id
     }
@@ -41,15 +32,16 @@ export default class UserHomeNavbar extends Component {
     render(){
         return(
             <ul className="list-group">
-
-                <li className="list-group-item"
-                onClick={()=>this.goToFav()}>My favorites</li>
-                <li className="list-group-item"
-                onClick={()=>this.goToWatchList}>My watchlist</li>
+                <Link to={'/favorites/' + this.state.user._id}>
+                    <li className="list-group-item">My favorites</li>
+                </Link>
+                <Link to={'/watchlist/' + this.state.user._id}>
+                    <li className="list-group-item">My watchlist</li>
+                </Link>
                 <li className="list-group-item">
                     Followers: {this.state.user.followers && this.state.user.followers.length}</li>
                 <li className="list-group-item"
-                    onClick={()=>this.goToFollowing()}>Following</li>
+                    onClick={()=>this.goToFollowing()}>Following: {}</li>
 
             </ul>
         )

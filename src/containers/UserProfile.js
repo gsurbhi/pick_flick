@@ -272,9 +272,9 @@ export default class UserProfile extends Component{
                                 </div>
                             </div>
                         </div>
-
-
                         <div className="col-sm-4">
+                            <i className="fa fa-user fa-5x"></i>
+                            <p className="h5">My Links</p>
                             <ProfileLinksComponent
                                 userId ={this.state.user._id}/>
                         </div>
