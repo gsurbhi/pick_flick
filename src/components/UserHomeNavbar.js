@@ -47,7 +47,6 @@ export default class UserHomeNavbar extends Component {
     }
 
     getSearchTerm(term){
-        console.log(term)
         this.setState({
             searchTerm:term
         });

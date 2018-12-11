@@ -11,6 +11,7 @@ class Home extends React.Component {
                             <i className="fa fa-video-camera pr-1 text-warning"></i>
                             PickFlick
                         </a>
+
                         <ul className="nav mr-auto">
                             <li className="nav-item">
                                 <Link to="/login" className="nav-link text-dark">
@@ -21,6 +22,9 @@ class Home extends React.Component {
                                 <Link to="/register" className="nav-link text-dark">
                                     Sign up!
                                 </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/fan/explore" className="nav-link">Explore</Link>
                             </li>
                         </ul>
                     </nav>

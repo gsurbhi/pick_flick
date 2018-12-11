@@ -60,11 +60,11 @@ class DetailsPage extends React.Component {
             <div>
                 <div hidden={this.state.loggedIn}>
                     <nav className="navbar navbar-light bg-light">
-                        {/*<a className="navbar-brand">*/}
-                            <Link to="/" className="fa fa-video-camera pr-1 text-warning">
-                                PickFlick
-                            </Link>
-                            {/*</a>*/}
+
+                        <Link to="/" className="navbar-brand">
+                            <i className="fa fa-video-camera pr-1 text-warning"></i>
+                            PickFlick
+                        </Link>
                         <ul className="nav mr-auto">
                             <li className="nav-item">
                                 <Link to="/login" className="nav-link text-dark">
@@ -75,6 +75,9 @@ class DetailsPage extends React.Component {
                                 <Link to="/register" className="nav-link text-dark">
                                     Sign up!
                                 </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/fan/explore" className="nav-link">Explore</Link>
                             </li>
                         </ul>
                     </nav>

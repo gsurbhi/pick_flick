@@ -151,7 +151,7 @@ export default class LoginHomeContainer extends Component{
                                     <CriticListCards
                                         key={index}
                                         movie={movie}
-                                        deleteFromUserWatchList={this.deleteFromUserWatchList}/>
+                                        deleteFromUserWatchList={this.dislikeMovie}/>
                                     }
                                 </div>
                             })

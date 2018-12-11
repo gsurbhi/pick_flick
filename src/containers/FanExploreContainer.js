@@ -19,13 +19,20 @@ export default class FanExploreContainer extends Component {
         this.unfollowUser = this.unfollowUser.bind(this)
     }
     componentDidMount() {
+
+        UserServiceClient.isloggedIn().then(response => {
+            if(response.status === 200){
+                UserServiceClient.getProfile().then(user => this.setUser(user))
+            }
+            /* else{
+                 alert("not logged in")
+             }*/
+        })
+
+        /* old code, before explore was made available to ALL
         UserServiceClient.getProfile().then(user => {
             this.setUser(user)
-            /*if(this.state.user.type !== 'Fan'){
-                console.log(this.state.user)
-                window.location.href='/profile/' + this.state.user._id
-            }*/
-        })
+        })*/
 
         setTimeout(() => {
             UserServiceClient.findAllUsers().then(userList =>  this.setUserList(userList))
