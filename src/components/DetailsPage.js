@@ -26,10 +26,6 @@ class DetailsPage extends React.Component {
 
     }
 
-    getReleaseYear(releaseDate) {
-        if (releaseDate)
-            return releaseDate.split('-')[0];
-    }
 
     setDetails(details) {
         this.setState(
@@ -74,50 +70,26 @@ class DetailsPage extends React.Component {
                             </div>
                             <div className='col-lg-8 col-md-10 col-sm-12 ml-2'>
                                 <div>
-                                    {this.state.details.original_title} ({this.getReleaseYear(this.state.details.release_date)})
+                                    <b>
+                                    {this.state.details.original_title}
+                                    </b>
                                 </div>
                                 <div>
-                                    Score: {this.state.details.vote_average}
-                                </div>
-                                <div className='headers'>
-                                    Overview
+                                    <b>Score: </b>
+                                    {this.state.details.vote_average}
                                 </div>
                                 <div>
+                                    <b>Overview</b>
                                     {this.state.details.overview}
                                 </div>
-                                <div className='mt-3'>
-                                    <div className='row'>
-                                        <div className='col-6'>
-                                            <div className='headers'>
-                                                Runtime
-                                            </div>
-                                            <div>
-                                                {this.state.details.runtime} mins
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='row mt-5'>
-                                        <div className='col-6'>
-                                            <div className='headers'>
-                                                Original Language
-                                            </div>
-                                            <div>
-                                                {this.state.details.original_language}
-                                            </div>
-                                        </div>
-                                        {/*<div className='col-6'>*/}
-                                            {/*<div className='headers'>*/}
-                                                {/*HomePage*/}
-                                            {/*</div>*/}
-                                            {/*<div>*/}
-                                                {/*<a href={this.state.details.homepage}>Hello</a>*/}
-                                                <CriticReview movieId ={this.props.match.params.movieId}
-                                                              original_title={this.state.details.original_title}/>
-                                            {/*</div>*/}
-                                        {/*</div>*/}
-                                    </div>
+                                <div>
+                                    <b>Original Language: </b>{this.state.details.original_language}
                                 </div>
-                            </div>
+                                <div className='col-6'>
+                                </div>
+                                    <CriticReview movieId ={this.props.match.params.movieId}
+                                                  original_title={this.state.details.original_title}/>
+                                </div>
                         </div>
                     </div>
 
