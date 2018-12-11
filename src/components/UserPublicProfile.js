@@ -1,25 +1,39 @@
 import React, {Component} from 'react'
 import UserHomeNavbar from "../components/UserHomeNavbar";
 import UserServiceClient from "../services/user.service.client";
-import {Link} from "react-router-dom";
 import '../styles/fan.explore.container.client.css';
-import CriticServiceClient from "../services/critic.service.client";
+import FanServiceClient from "../services/fan.service.client"
 
 export default class UserPublicProfile extends Component {
 
     constructor(props){
-        super(props)
+        super(props);
         this.state = {
             user:'',
-            reviews:''
-        }
-        this.setUser = this.setUser.bind(this)
+            reviews:'',
+            nFollowers:'',
+            nFollowing:''
+        };
+        this.setUser = this.setUser.bind(this);
         this.setUserList = this.setUserList.bind(this)
     }
     componentDidMount() {
-        UserServiceClient.findUserById(this.props.match.params.userId).then(user => {
-            this.setUser(user)
+        UserServiceClient.findUserById(this.props.match.params.userId).then(res => {
+
+
+            FanServiceClient.findMyFollowing(this.props.match.params.userId).then(res_1 => {
+                FanServiceClient.findMyFollowers(this.props.match.params.userId).then(res_2 => {
+                    console.log("something" , res_1)
+                    console.log("something else" , res_2)
+                    this.setState({
+                        nFollowers: res_2 ? res_2.length :0 ,
+                        nFollowing: res_1 ? res_1.length :0,
+                        user:res
+                    })
+                })
+            })
         })
+
     }
 
     setUser(user){
@@ -41,6 +55,7 @@ export default class UserPublicProfile extends Component {
 
 
     render(){
+        console.log("renderin" , this.state)
         return (
             <div>
                 <UserHomeNavbar/>
@@ -55,10 +70,10 @@ export default class UserPublicProfile extends Component {
                             Username: {this.state.user.username}
                         </div>
                         <div>
-                            Followers: {this.state.user.followers && this.state.user.followers.length}
+                            Followers: {this.state.nFollowers}
                         </div>
                         <div>
-                            Following: {this.state.user.following && this.state.user.following.length}
+                            Following: {this.state.nFollowing}
                         </div>
                     </li>
                 </ul>

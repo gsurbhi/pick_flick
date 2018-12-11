@@ -1,19 +1,11 @@
 let FAN_URL = 'http://desolate-retreat-56126.herokuapp.com/api/';
+//let FAN_URL = 'http://localhost:4000/api/';
+
 
 class FanServiceClient {
 
-    static findAllFans() {
-        return fetch(FAN_URL + 'fan', {
-            method: 'get',
-            credentials: "include",
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-    }
-
-    static followFan(id) {
-        return fetch(FAN_URL + 'fan/' + id, {
+    static followFan(fanId,userId) {
+        return fetch(FAN_URL+ userId + '/fan/' + fanId, {
             method: 'post',
             credentials: "include",
             headers: {
@@ -22,37 +14,40 @@ class FanServiceClient {
         })
     }
 
-    static unfollowFan(item) {
-        return fetch(FAN_URL + 'fan/unfollow', {
+    static unfollowFan(fanId,userId) {
+        return fetch(FAN_URL + userId+ '/fan/'+fanId, {
             method: 'delete',
             credentials: "include",
-            body: JSON.stringify(item),
             headers: {
                 'Content-Type': 'application/json'
             }
         });
     }
 
-    static getFanContent(id) {
-        return fetch(FAN_URL + 'fan/likes/' + id, {
-            method: 'get',
+    static findMyFollowers(userId){
+        return fetch(FAN_URL + userId+ '/follower', {
             credentials: "include",
             headers: {
                 'Content-Type': 'application/json'
             }
+        }).then(res=>{
+            return res.json()
         })
-
     }
 
-    static getFollowedFansForUser() {
-        return fetch(FAN_URL + 'fan/following', {
-            method: 'get',
+    static findMyFollowing(userId){
+        return fetch(FAN_URL + userId+ '/following', {
             credentials: "include",
             headers: {
                 'Content-Type': 'application/json'
             }
+        }).then(res=>{
+            return res.json()
         })
     }
+
+
+
 }
 
 export default FanServiceClient;

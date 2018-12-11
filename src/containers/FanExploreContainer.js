@@ -8,35 +8,51 @@ import FanServiceClient from "../services/fan.service.client";
 export default class FanExploreContainer extends Component {
 
     constructor(props){
-        super(props)
+        super(props);
         this.state = {
             user:'',
-            userList:[]
-        }
+            userList:[],
+            loggedIn: false
+
+        };
         this.setUser = this.setUser.bind(this)
         this.setUserList = this.setUserList.bind(this)
-        this.setLoginToggle = this.setLoginToggle.bind(this)
+        //this.setLoginToggle = this.setLoginToggle.bind(this)
         this.followUser = this.followUser.bind(this)
         this.unfollowUser = this.unfollowUser.bind(this)
     }
 
-    setLoginToggle(flag){
-        this.setState({
-            loggedIn: flag
-        })
-
-    }
+    // setLoginToggle(flag){
+    //     this.setState({
+    //         loggedIn: flag
+    //     })
+    //
+    // }
 
     componentDidMount() {
 
         UserServiceClient.isloggedIn().then(response => {
-            if(response.status === 200){
-                this.setLoginToggle(true)
-                UserServiceClient.getProfile().then(user => this.setUser(user))
-            }
-            else{
-                this.setLoginToggle(false)
-            }
+            console.log("status of logged in",response.status);
+            UserServiceClient.findAllUsers().then(res_2=>{
+                UserServiceClient.getProfile().then(res_3=>{
+                    this.setState({
+                        userList:res_2,
+                        loggedIn : response.status===200,
+                        user: res_3
+                    })
+                })
+
+            })
+            // if(response.status === 200){
+            //     this.setLoginToggle(true)
+            //     UserServiceClient.getProfile().then(user => {
+            //         console.log("hte siser shvisd" , user)
+            //         this.setUser(user)
+            //     })
+            // }
+            // else{
+            //     this.setLoginToggle(false)
+            // }
         })
 
         /* old code, before explore was made available to ALL
@@ -62,14 +78,14 @@ export default class FanExploreContainer extends Component {
         })
     }
 
-    followUser(user){
-        FanServiceClient.followFan(user._id).then(response => console.log(response.status))
-        alert("followed user" + user.firstName)
+    followUser(fanID,userId){
+        FanServiceClient.followFan(fanID._id,userId).then(response => console.log(response.status))
+        alert("followed user: " + fanID.firstName)
     }
 
-    unfollowUser(user){
-        FanServiceClient.unfollowFan(user).then(response => console.log(response.status))
-        alert("unfollowed user" + user.firstName)
+    unfollowUser(fanID,userId){
+        FanServiceClient.unfollowFan(fanID._id,userId).then(response => console.log(response.status))
+        alert("unfollowed user" + fanID.firstName)
     }
 
 
@@ -107,24 +123,24 @@ export default class FanExploreContainer extends Component {
                 <div className="mt-2 container">
                     <div className="row">
                     {
-                        this.state.userList && this.state.userList.map((user,index) => {
+                        this.state.userList && this.state.userList.map((fan,index) => {
                             return <div className="col-lg-2 col-md-4 col-sm-12">
                                 <div className="card">
                                     <img className="card-img"
                                          src="http://icons.iconarchive.com/icons/graphicloads/100-flat/72/contact-icon.png"/>
                                     <div className="card-body">
-                                        <h5 className="card-title">{user.firstName} {user.lastName}</h5>
+                                        <h5 className="card-title">{fan.firstName} {fan.lastName}</h5>
                                         <p className="card-text">
-                                            <Link to={`/public/profile/${user._id}`}>
+                                            <Link to={`/public/profile/${fan._id}`}>
                                                 Profile
                                             </Link>
                                             <div hidden={!this.state.loggedIn}>
                                             <button className="btn btn-outline-success"
-                                                    onClick={()=> this.followUser(user)}>
+                                                    onClick={()=> this.followUser(fan,this.state.user._id)}>
                                                 Follow
                                             </button>
                                             <button className="btn btn-outline-danger"
-                                                    onClick={()=> this.unfollowUser(user)}>
+                                                    onClick={()=> this.unfollowFan(fan,this.state.user._id)}>
                                                 Unfollow
                                             </button>
                                             </div>
