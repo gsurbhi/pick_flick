@@ -27,7 +27,6 @@ class CriticServiceClient {
     }
 
     static findAllCriticReviewsForMovie(movieId) {
-        console.log(movieId)
         return fetch(CRITIC_URL+"/"+movieId, {
             credentials: 'include'
         }).then(response => response.json())

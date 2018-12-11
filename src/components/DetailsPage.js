@@ -13,11 +13,13 @@ class DetailsPage extends React.Component {
         this.state = {
             movieId:'',
             details:'',
-            loggedIn: false
+            loggedIn: false,
+            userType:''
         };
         this.setLoginToggle = this.setLoginToggle.bind(this)
         this.setMovieId = this.setMovieId.bind(this)
         this.setDetails = this.setDetails.bind(this)
+        this.setType = this.setType.bind(this)
     }
 
     setMovieId(movieId){
@@ -25,11 +27,16 @@ class DetailsPage extends React.Component {
     }
 
     setLoginToggle(flag){
-        console.log("flag" + flag)
         this.setState({
             loggedIn: flag
         })
 
+    }
+
+    setType(type){
+        this.setState({
+            userType:type
+        })
     }
 
     componentWillMount() {
@@ -40,6 +47,7 @@ class DetailsPage extends React.Component {
         UserServiceClient.isloggedIn().then(response => {
             if(response.status === 200){
                 this.setLoginToggle(true)
+                UserServiceClient.getProfile().then(user => this.setType(user.type))
             }
             else{
                 this.setLoginToggle(false)
@@ -118,8 +126,17 @@ class DetailsPage extends React.Component {
                             </div>
                             <div className='col-6'>
                             </div>
-                            <CriticReview movieId ={this.props.match.params.movieId}
+                            {
+                                this.state.loggedIn === false &&
+                                <CriticReview movieId ={this.props.match.params.movieId}
                                               original_title={this.state.details.original_title}/>
+                            }
+                            {
+                                this.state.userType === 'Critic' &&
+                                <CriticReview movieId ={this.props.match.params.movieId}
+                                              original_title={this.state.details.original_title}/>
+                            }
+
                         </div>
                     </div>
 
