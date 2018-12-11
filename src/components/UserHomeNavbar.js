@@ -71,10 +71,10 @@ export default class UserHomeNavbar extends Component {
 
                     {
                         this.state.userType !== 'Critic' &&
-                    <Link to={"/" + this.state.userId + "/home"} className="navbar-brand">
-                        <i className="fa fa-video-camera pr-1 text-warning"></i>
-                        PickFlick
-                    </Link>
+                        <Link to={"/" + this.state.userId + "/home"} className="navbar-brand">
+                            <i className="fa fa-video-camera pr-1 text-warning"></i>
+                            PickFlick
+                        </Link>
                     }
                     <button className="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

@@ -243,13 +243,13 @@ export default class UserProfile extends Component{
                                     </div>
                                 </div>
                                 <div className="form-group row">
-                                    <div className="col-sm-8 my-2">
+                                    {/*<div className="col-sm-8 my-2">
                                         <Link to={"/"+this.state.user.id+"/home"}>
                                             <button className="btn btn-success btn-block">
                                                 Home
                                             </button>
                                         </Link>
-                                    </div>
+                                    </div>*/}
                                     <div className="col-sm-8 mt-2">
                                         <Link to="/">
                                             <button className="btn btn-danger btn-block"

@@ -32,11 +32,21 @@ export default class ProfileLinksComponent extends Component {
     render(){
         return(
             <ul className="list-group">
+                { this.state.user.type === 'Critic' &&
+                    <Link to={"/critic/"+this.state.user._id+"/critic-home"} >
+                        <li className="list-group-item"> My Home </li>
+                    </Link>
+                }
+                { this.state.user.type !== 'Critic' &&
+                    <Link to={"/"+this.state.user._id+"/home"} >
+                        <li className="list-group-item"> My Home </li>
+                    </Link>
+                }
                 <Link to={'/favorites/' + this.state.user._id}>
-                    <li className="list-group-item">My favorites</li>
+                    <li className="list-group-item">My Favorites</li>
                 </Link>
                 <Link to={'/watchlist/' + this.state.user._id}>
-                    <li className="list-group-item">My watchlist</li>
+                    <li className="list-group-item">My Watchlist</li>
                 </Link>
                 <li className="list-group-item">
                     Followers: {this.state.user.followers && this.state.user.followers.length}</li>
