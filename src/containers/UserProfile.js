@@ -85,10 +85,9 @@ export default class UserProfile extends Component{
     }
 
     updateProfile(){
-         console.log(this.state.user)
-         UserServiceClient.updateProfile(this.state.user)
+         UserServiceClient.updateProfile(this.state.user).then(response => console.log(response.status))
+        alert("Successfully updated profile")
         setTimeout(()=>UserServiceClient.getProfile().then(user=> this.setUser(user)), 500)
-         console.log(this.state.user.firstName)
 
     }
 
@@ -261,13 +260,13 @@ export default class UserProfile extends Component{
                         </div>
 
                     </form>
-                    <div className="form-group row col-sm-8">
-
-                        <button className="btn btn-warning btn-block"
-                        onClick={()=>this.updateProfile()}>
-                            Update
-                        </button>
-
+                    <div className="form-group row">
+                        <div className="col-sm-8">
+                            <button className="btn btn-warning btn-block"
+                                    onClick={()=>this.updateProfile()}>
+                                Update
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

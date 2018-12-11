@@ -8,7 +8,8 @@ const UserHomeMovieCards = ({movie,addMovieToUserWatchList,favoriteMovie,dislike
                 <div className="card-body">
                     <h6 className="card-title">{movie.title}</h6>
                     <p className="card-text text-muted text-truncate">{movie.overview}</p>
-                    <button className="btn btn-outline-warning btn-sm mr-1" onClick={() => {addMovieToUserWatchList(movie)}}>
+                    <button className="btn btn-outline-warning btn-sm mr-1"
+                            onClick={() => {addMovieToUserWatchList(movie)}}>
                         <i className="fa fa-plus"></i>
                     </button>
                     <button className="btn btn-outline-success btn-sm mr-1" onClick={() => favoriteMovie(movie)}>
@@ -17,6 +18,11 @@ const UserHomeMovieCards = ({movie,addMovieToUserWatchList,favoriteMovie,dislike
                     <button className="btn btn-outline-danger btn-sm mr-1">
                         <i className="fa fa-thumbs-down" onClick={() => dislikeMovie(movie)}></i>
                     </button>
+                    <div>
+                        <Link to={`/details/${movie.id}`}>
+                            More details
+                        </Link>
+                    </div>
 
                 </div>
         </div>

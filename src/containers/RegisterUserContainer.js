@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import UserServiceClient from "../services/user.service.client"
+import AdminServiceClient from "../services/admin.service.client";
 
 export default class RegisterUserContainer extends Component{
 
@@ -24,15 +25,17 @@ export default class RegisterUserContainer extends Component{
 
 
     register(user){
-        console.log(this.state.user.username)
-        UserServiceClient.register(this.state.user).then(res => {
-
-                UserServiceClient.getProfile().then(user=> window.location.href="/profile/"+user._id)
-
-            
+        UserServiceClient.register(this.state.user).then(response=>
+        {
+            if(response.status === 200){
+                alert("Registration successful, redirecting you to login page")
+                window.location.href='/login'
+            }
+            else {
+                alert("Registration unsuccessful. Please try again later")
+            }
         })
-
-
+        //setTimeout(() => {UserServiceClient.getProfile().then(user => console.log(user))}, 2000)
     }
 
     updatefields(type,e){
@@ -242,23 +245,22 @@ export default class RegisterUserContainer extends Component{
                                        value={this.state.user.city}/>
                             </div>
                         </div>
-
-                        <div className="form-group row">
-                            <div className="col-sm-8 my-2">
-
-                                    <button className="btn btn-success btn-block"
-                                    onClick={() => this.register(this.state.user)}>
-                                        Sign up
-                                    </button>
-
-                            </div>
-                            <div className="col-sm-8">
-                                <Link to="/login">
-                                        Sign In
-                                </Link>
-                            </div>
-                        </div>
                     </form>
+                    <div className="form-group row">
+                        <div className="col-sm-8 my-2">
+
+                            <button className="btn btn-success btn-block"
+                                    onClick={() => this.register(this.state.user)}>
+                                Sign up
+                            </button>
+
+                        </div>
+                        <div className="col-sm-8">
+                            <Link to="/login">
+                                Sign In
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

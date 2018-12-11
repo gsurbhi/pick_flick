@@ -27,7 +27,16 @@ export default class UserHomeNavbar extends Component {
         });
     }
     componentDidMount() {
-        UserServiceClient.getProfile().then(user => this.setUserId(user._id,user.type))
+        //UserServiceClient.getProfile().then(user => this.setUserId(user._id,user.type))
+        UserServiceClient.isloggedIn().then(response => {
+            if(response.status === 200){
+                UserServiceClient.getProfile().then(user => this.setUserId(user._id,user.type))
+            }
+           /* else{
+                console.log("not loged in")
+            }*/
+        })
+
     }
 
     logout(){
@@ -45,7 +54,6 @@ export default class UserHomeNavbar extends Component {
     }
 
     searchResults(){
-        console.log("Sfdsfs")
         window.location.href='/search/'+this.state.searchTerm
     }
 
