@@ -22,11 +22,6 @@ class Home extends React.Component {
                                     Sign up!
                                 </Link>
                             </li>
-                            <li className="nav-item">
-                            <Link to= '/explore' className="nav-link text-dark">
-                                    Explore
-                            </Link>
-                            </li>
                         </ul>
                     </nav>
                     <form className="form-inline">
