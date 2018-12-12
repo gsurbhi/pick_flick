@@ -2,6 +2,7 @@ import MovieServiceClient from "./movie.service.client";
 
 let _singleton = Symbol();
 let CRITIC_URL = 'http://desolate-retreat-56126.herokuapp.com/api/review';
+//let CRITIC_URL = 'http://localhost:4000/api/review';
 
 class CriticServiceClient {
     constructor(singletonToken) {

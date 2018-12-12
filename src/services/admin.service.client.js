@@ -1,7 +1,7 @@
 let _singleton = Symbol();
 
 let HEROKU_URL = 'http://desolate-retreat-56126.herokuapp.com/api/';
-
+//let HEROKU_URL = 'http://localhost:4000/api/';
 class AdminServiceClient {
     constructor(singletonToken) {
         if (_singleton !== singletonToken)

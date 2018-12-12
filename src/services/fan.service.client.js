@@ -1,8 +1,12 @@
+
 let FAN_URL = 'http://desolate-retreat-56126.herokuapp.com/api/';
 //let FAN_URL = 'http://localhost:4000/api/';
 
 
+//let FAN_URL = 'http://desolate-retreat-56126.herokuapp.com/api/';
+
 class FanServiceClient {
+
 
     static followFan(fanId,userId) {
         return fetch(FAN_URL+ userId + '/fan/' + fanId, {

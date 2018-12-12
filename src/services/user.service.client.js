@@ -1,5 +1,6 @@
 let _singleton = Symbol();
 let heroku = 'http://desolate-retreat-56126.herokuapp.com/api/';
+//let heroku = 'http://localhost:4000/api/';
 
 class UserServiceClient {
 

@@ -8,7 +8,9 @@ class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = {movies:[],
-        nowPlaying : []};
+        nowPlaying : [],
+        query:''};
+
         this.movieService = MovieService.instance;
         this.searchMovies = this.searchMovies.bind(this);
     }
@@ -37,9 +39,15 @@ class Search extends React.Component {
             });
     }
 
+    onclickSearch(){
+
+        this.getMovieList(this.state.query);
+
+    }
+
     searchMovies(event) {
-        let query = event.target.value;
-        this.getMovieList(query);
+        this.setState({query:event.target.value})
+
     }
 
 
@@ -51,7 +59,9 @@ class Search extends React.Component {
                 <input className="form-control mr-sm-2"
                        id="search-movies"
                        type="search" onChange={this.searchMovies} placeholder="Search" aria-label="Search"/>
-                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <button className="btn btn-outline-success my-2 my-sm-0"
+                        onClick={()=>this.onclickSearch()
+                        }type="button">Search</button>
 
                 <div className='row m-2'>
                     <div className='col-9'>

@@ -1,5 +1,6 @@
 let _singleton = Symbol();
 let MAPI_URL = 'http://desolate-retreat-56126.herokuapp.com/api/movie';
+//let MAPI_URL = 'http://localhost:4000/api/movie';
 
 class MovieApiClient {
     constructor(singletonToken) {
