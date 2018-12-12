@@ -38,16 +38,6 @@ export default class FanExploreContainer extends Component {
             else{
                 this.setLoginToggle(false)
             }
-            if(response.status === 200){
-                this.setLoginToggle(true)
-                UserServiceClient.getProfile().then(user => {
-                    console.log("hte siser shvisd" , user)
-                    this.setUser(user)
-                })
-            }
-            else{
-                this.setLoginToggle(false)
-            }
         })
 
         /* old code, before explore was made available to ALL
