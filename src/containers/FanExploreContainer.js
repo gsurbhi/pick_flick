@@ -11,48 +11,43 @@ export default class FanExploreContainer extends Component {
         super(props);
         this.state = {
             user:'',
-            userList:[],
-            loggedIn: false
+            userList:[]
+        }
 
-        };
         this.setUser = this.setUser.bind(this)
         this.setUserList = this.setUserList.bind(this)
-        //this.setLoginToggle = this.setLoginToggle.bind(this)
+        this.setLoginToggle = this.setLoginToggle.bind(this)
         this.followUser = this.followUser.bind(this)
         this.unfollowUser = this.unfollowUser.bind(this)
     }
 
-    // setLoginToggle(flag){
-    //     this.setState({
-    //         loggedIn: flag
-    //     })
-    //
-    // }
+    setLoginToggle(flag){
+        this.setState({
+            loggedIn: flag
+        })
+
+    }
 
     componentDidMount() {
 
         UserServiceClient.isloggedIn().then(response => {
-            console.log("status of logged in",response.status);
-            UserServiceClient.findAllUsers().then(res_2=>{
-                UserServiceClient.getProfile().then(res_3=>{
-                    this.setState({
-                        userList:res_2,
-                        loggedIn : response.status===200,
-                        user: res_3
-                    })
+            if(response.status === 200){
+                this.setLoginToggle(true)
+                UserServiceClient.getProfile().then(user => this.setUser(user))
+            }
+            else{
+                this.setLoginToggle(false)
+            }
+            if(response.status === 200){
+                this.setLoginToggle(true)
+                UserServiceClient.getProfile().then(user => {
+                    console.log("hte siser shvisd" , user)
+                    this.setUser(user)
                 })
-
-            })
-            // if(response.status === 200){
-            //     this.setLoginToggle(true)
-            //     UserServiceClient.getProfile().then(user => {
-            //         console.log("hte siser shvisd" , user)
-            //         this.setUser(user)
-            //     })
-            // }
-            // else{
-            //     this.setLoginToggle(false)
-            // }
+            }
+            else{
+                this.setLoginToggle(false)
+            }
         })
 
         /* old code, before explore was made available to ALL
